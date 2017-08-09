@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.hrsj.it.idea.core.context.IdeaContext;
 import com.hrsj.it.idea.core.context.constants.IdeaDispatcherConstants;
 import com.hrsj.it.idea.core.context.manager.IdeaContextManager;
+import com.hrsj.it.idea.core.permission.IPermissionOperateable;
 import com.hrsj.it.idea.core.upload.IdeaFileUpload;
 
 /**
@@ -78,7 +79,11 @@ public class IdeaResourceDispatcher implements Filter
     private void handleIdeaPremission( HttpServletRequest request,
             HttpServletResponse response )
     {
-        // todo
+        IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
+        WebApplicationContext application = ideaContext.getApplicationContext();
+        IPermissionOperateable permissionScanner = application
+                .getBean( IPermissionOperateable.class );
+        permissionScanner.syncIdeaPermission();
     }
 
     private void handleFileUpload( HttpServletRequest request,

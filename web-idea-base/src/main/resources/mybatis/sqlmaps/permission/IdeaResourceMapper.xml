@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrsj.it.idea.core.permission.dao.IdeaResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.hrsj.it.idea.core.permission.domain.IdeaResource" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="resource_desc" property="resourceDesc" jdbcType="VARCHAR" />
+    <result column="operation_code" property="operationCode" jdbcType="VARCHAR" />
+    <result column="opetation_desc" property="opetationDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, resource_code, resource_desc, operation_code, opetation_desc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from idea_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from idea_resource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from idea_resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResourceExample" >
+    delete from idea_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResource" >
+    insert into idea_resource (id, resource_code, resource_desc, 
+      operation_code, opetation_desc)
+    values (#{id,jdbcType=INTEGER}, #{resourceCode,jdbcType=VARCHAR}, #{resourceDesc,jdbcType=VARCHAR}, 
+      #{operationCode,jdbcType=VARCHAR}, #{opetationDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResource" >
+    insert into idea_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resourceCode != null" >
+        resource_code,
+      </if>
+      <if test="resourceDesc != null" >
+        resource_desc,
+      </if>
+      <if test="operationCode != null" >
+        operation_code,
+      </if>
+      <if test="opetationDesc != null" >
+        opetation_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resourceCode != null" >
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDesc != null" >
+        #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operationCode != null" >
+        #{operationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="opetationDesc != null" >
+        #{opetationDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResourceExample" resultType="java.lang.Integer" >
+    select count(*) from idea_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update idea_resource
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceCode != null" >
+        resource_code = #{record.resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceDesc != null" >
+        resource_desc = #{record.resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationCode != null" >
+        operation_code = #{record.operationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opetationDesc != null" >
+        opetation_desc = #{record.opetationDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update idea_resource
+    set id = #{record.id,jdbcType=INTEGER},
+      resource_code = #{record.resourceCode,jdbcType=VARCHAR},
+      resource_desc = #{record.resourceDesc,jdbcType=VARCHAR},
+      operation_code = #{record.operationCode,jdbcType=VARCHAR},
+      opetation_desc = #{record.opetationDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResource" >
+    update idea_resource
+    <set >
+      <if test="resourceCode != null" >
+        resource_code = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDesc != null" >
+        resource_desc = #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operationCode != null" >
+        operation_code = #{operationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="opetationDesc != null" >
+        opetation_desc = #{opetationDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrsj.it.idea.core.permission.domain.IdeaResource" >
+    update idea_resource
+    set resource_code = #{resourceCode,jdbcType=VARCHAR},
+      resource_desc = #{resourceDesc,jdbcType=VARCHAR},
+      operation_code = #{operationCode,jdbcType=VARCHAR},
+      opetation_desc = #{opetationDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

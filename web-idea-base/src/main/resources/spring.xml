@@ -14,7 +14,7 @@
 
 	<context:annotation-config />
 	
-	<context:component-scan base-package="com.hrsj.it.idea.core.upload.servlet.**">
+	<context:component-scan base-package="com.hrsj.it.idea.**">
 	</context:component-scan>
 
 </beans>
