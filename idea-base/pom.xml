@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.hrsj.it</groupId>
-	<artifactId>web-idea-base</artifactId>
+	<artifactId>idea-base</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>web-idea-base</name>
+	<name>idea-base</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
