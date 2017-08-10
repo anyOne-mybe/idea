@@ -1,15 +1,21 @@
 package com.hrsj.it.idea.core.permission.domain;
 
-public class IdeaResource {
+public class ResourceVO {
     private Integer id;
 
     private String resourceCode;
 
     private String resourceDesc;
 
+    private String resourceType;
+
     private String operationCode;
 
     private String opetationDesc;
+
+    private String appName;
+
+    private Boolean available;
 
     public Integer getId() {
         return id;
@@ -35,6 +41,14 @@ public class IdeaResource {
         this.resourceDesc = resourceDesc == null ? null : resourceDesc.trim();
     }
 
+    public String getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(String resourceType) {
+        this.resourceType = resourceType == null ? null : resourceType.trim();
+    }
+
     public String getOperationCode() {
         return operationCode;
     }
@@ -49,5 +63,21 @@ public class IdeaResource {
 
     public void setOpetationDesc(String opetationDesc) {
         this.opetationDesc = opetationDesc == null ? null : opetationDesc.trim();
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName == null ? null : appName.trim();
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

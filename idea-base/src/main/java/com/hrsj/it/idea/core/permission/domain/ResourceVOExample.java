@@ -3,14 +3,14 @@ package com.hrsj.it.idea.core.permission.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IdeaResourceExample {
+public class ResourceVOExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public IdeaResourceExample() {
+    public ResourceVOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -304,6 +304,76 @@ public class IdeaResourceExample {
             return (Criteria) this;
         }
 
+        public Criteria andResourceTypeIsNull() {
+            addCriterion("resource_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeIsNotNull() {
+            addCriterion("resource_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeEqualTo(String value) {
+            addCriterion("resource_type =", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotEqualTo(String value) {
+            addCriterion("resource_type <>", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeGreaterThan(String value) {
+            addCriterion("resource_type >", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("resource_type >=", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeLessThan(String value) {
+            addCriterion("resource_type <", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeLessThanOrEqualTo(String value) {
+            addCriterion("resource_type <=", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeLike(String value) {
+            addCriterion("resource_type like", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotLike(String value) {
+            addCriterion("resource_type not like", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeIn(List<String> values) {
+            addCriterion("resource_type in", values, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotIn(List<String> values) {
+            addCriterion("resource_type not in", values, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeBetween(String value1, String value2) {
+            addCriterion("resource_type between", value1, value2, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotBetween(String value1, String value2) {
+            addCriterion("resource_type not between", value1, value2, "resourceType");
+            return (Criteria) this;
+        }
+
         public Criteria andOperationCodeIsNull() {
             addCriterion("operation_code is null");
             return (Criteria) this;
@@ -441,6 +511,146 @@ public class IdeaResourceExample {
 
         public Criteria andOpetationDescNotBetween(String value1, String value2) {
             addCriterion("opetation_desc not between", value1, value2, "opetationDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameIsNull() {
+            addCriterion("app_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameIsNotNull() {
+            addCriterion("app_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameEqualTo(String value) {
+            addCriterion("app_name =", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameNotEqualTo(String value) {
+            addCriterion("app_name <>", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameGreaterThan(String value) {
+            addCriterion("app_name >", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameGreaterThanOrEqualTo(String value) {
+            addCriterion("app_name >=", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameLessThan(String value) {
+            addCriterion("app_name <", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameLessThanOrEqualTo(String value) {
+            addCriterion("app_name <=", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameLike(String value) {
+            addCriterion("app_name like", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameNotLike(String value) {
+            addCriterion("app_name not like", value, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameIn(List<String> values) {
+            addCriterion("app_name in", values, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameNotIn(List<String> values) {
+            addCriterion("app_name not in", values, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameBetween(String value1, String value2) {
+            addCriterion("app_name between", value1, value2, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppNameNotBetween(String value1, String value2) {
+            addCriterion("app_name not between", value1, value2, "appName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableIsNull() {
+            addCriterion("available is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableIsNotNull() {
+            addCriterion("available is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableEqualTo(Boolean value) {
+            addCriterion("available =", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableNotEqualTo(Boolean value) {
+            addCriterion("available <>", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableGreaterThan(Boolean value) {
+            addCriterion("available >", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("available >=", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableLessThan(Boolean value) {
+            addCriterion("available <", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableLessThanOrEqualTo(Boolean value) {
+            addCriterion("available <=", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableLike(Boolean value) {
+            addCriterion("available like", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableNotLike(Boolean value) {
+            addCriterion("available not like", value, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableIn(List<Boolean> values) {
+            addCriterion("available in", values, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableNotIn(List<Boolean> values) {
+            addCriterion("available not in", values, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableBetween(Boolean value1, Boolean value2) {
+            addCriterion("available between", value1, value2, "available");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvailableNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("available not between", value1, value2, "available");
             return (Criteria) this;
         }
     }

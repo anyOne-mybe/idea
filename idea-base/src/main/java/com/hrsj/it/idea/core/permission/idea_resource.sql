@@ -1,9 +1,13 @@
 --系统资源定义表
-create table idea_resource(
+create table tpl_idea_resource(
 	id int(10) not null auto_increment,
 	resource_code varchar(100),
 	resource_desc varchar(200),
+	resource_type varchar(20),
 	operation_code varchar(100),
 	opetation_desc varchar(200),
-	primary key(id)
+	app_name        varchar(50),
+	available       char(1),
+	primary key(id),
+	unique(resource_code,resource_type,operation_code,appName)
 );

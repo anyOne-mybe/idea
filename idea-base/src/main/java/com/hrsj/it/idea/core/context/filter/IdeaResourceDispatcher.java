@@ -83,7 +83,18 @@ public class IdeaResourceDispatcher implements Filter
         WebApplicationContext application = ideaContext.getApplicationContext();
         IPermissionOperateable permissionScanner = application
                 .getBean( IPermissionOperateable.class );
-        permissionScanner.syncIdeaPermission();
+
+        String operateType = request.getParameter( "operateType" );
+        if ( StringUtils.equals( operateType, "update" ) )
+        {
+            // 同步权限
+            permissionScanner.syncIdeaPermission();
+        } else if ( StringUtils.equals( operateType, "delete" ) )
+        {
+            // 删除失效的权限
+            permissionScanner.deleteUnUsedPermission();
+        }
+
     }
 
     private void handleFileUpload( HttpServletRequest request,
