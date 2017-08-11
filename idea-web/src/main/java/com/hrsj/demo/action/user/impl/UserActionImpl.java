@@ -5,19 +5,21 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+
 import com.hrsj.demo.action.user.IUserAction;
 import com.hrsj.demo.domain.common.PagedResult;
 import com.hrsj.demo.domain.common.Pager;
 import com.hrsj.demo.domain.common.ServiceResponse;
 import com.hrsj.demo.domain.user.User;
 import com.hrsj.demo.facade.user.IUserFacade;
-import com.hrsj.it.idea.core.permission.annotation.IdeaOperation;
-import com.hrsj.it.idea.core.permission.annotation.IdeaResource;
-import com.hrsj.it.idea.core.permission.enume.Policy;
+import com.idea.it.core.permission.annotation.IdeaOperation;
+import com.idea.it.core.permission.annotation.IdeaResource;
+import com.idea.it.core.permission.enume.Policy;
 
 @IdeaResource( code = "demo.user", desc = "用户模块" )
 @Named

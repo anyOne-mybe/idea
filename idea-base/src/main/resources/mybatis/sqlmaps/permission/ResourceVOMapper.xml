@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hrsj.it.idea.core.permission.dao.ResourceVOMapper" >
-  <resultMap id="BaseResultMap" type="com.hrsj.it.idea.core.permission.domain.ResourceVO" >
+<mapper namespace="com.idea.it.core.permission.dao.ResourceVOMapper" >
+  <resultMap id="BaseResultMap" type="com.idea.it.core.permission.domain.ResourceVO" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
     <result column="resource_desc" property="resourceDesc" jdbcType="VARCHAR" />
@@ -10,6 +10,8 @@
     <result column="opetation_desc" property="opetationDesc" jdbcType="VARCHAR" />
     <result column="app_name" property="appName" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="CHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,9 +73,9 @@
   </sql>
   <sql id="Base_Column_List" >
     id, resource_code, resource_desc, resource_type, operation_code, opetation_desc, 
-    app_name, available
+    app_name, available, update_time, update_by
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVOExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.idea.it.core.permission.domain.ResourceVOExample" >
     select
     <if test="distinct" >
       distinct
@@ -98,21 +100,23 @@
     delete from tpl_idea_resource
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVOExample" >
+  <delete id="deleteByExample" parameterType="com.idea.it.core.permission.domain.ResourceVOExample" >
     delete from tpl_idea_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVO" >
-    insert into tpl_idea_resource (resource_code, resource_desc, 
+  <insert id="insert" parameterType="com.idea.it.core.permission.domain.ResourceVO" >
+    insert into tpl_idea_resource (id, resource_code, resource_desc, 
       resource_type, operation_code, opetation_desc, 
-      app_name, available)
-    values (#{resourceCode,jdbcType=VARCHAR}, #{resourceDesc,jdbcType=VARCHAR}, 
+      app_name, available, update_time, 
+      update_by)
+    values (#{id,jdbcType=INTEGER}, #{resourceCode,jdbcType=VARCHAR}, #{resourceDesc,jdbcType=VARCHAR}, 
       #{resourceType,jdbcType=VARCHAR}, #{operationCode,jdbcType=VARCHAR}, #{opetationDesc,jdbcType=VARCHAR}, 
-      #{appName,jdbcType=VARCHAR}, #{available,jdbcType=CHAR})
+      #{appName,jdbcType=VARCHAR}, #{available,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVO" >
+  <insert id="insertSelective" parameterType="com.idea.it.core.permission.domain.ResourceVO" >
     insert into tpl_idea_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -138,6 +142,12 @@
       </if>
       <if test="available != null" >
         available,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -165,9 +175,15 @@
       <if test="available != null" >
         #{available,jdbcType=CHAR},
       </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVOExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.idea.it.core.permission.domain.ResourceVOExample" resultType="java.lang.Integer" >
     select count(*) from tpl_idea_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -200,6 +216,12 @@
       <if test="record.available != null" >
         available = #{record.available,jdbcType=CHAR},
       </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -214,12 +236,14 @@
       operation_code = #{record.operationCode,jdbcType=VARCHAR},
       opetation_desc = #{record.opetationDesc,jdbcType=VARCHAR},
       app_name = #{record.appName,jdbcType=VARCHAR},
-      available = #{record.available,jdbcType=CHAR}
+      available = #{record.available,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVO" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.idea.it.core.permission.domain.ResourceVO" >
     update tpl_idea_resource
     <set >
       <if test="resourceCode != null" >
@@ -243,10 +267,16 @@
       <if test="available != null" >
         available = #{available,jdbcType=CHAR},
       </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hrsj.it.idea.core.permission.domain.ResourceVO" >
+  <update id="updateByPrimaryKey" parameterType="com.idea.it.core.permission.domain.ResourceVO" >
     update tpl_idea_resource
     set resource_code = #{resourceCode,jdbcType=VARCHAR},
       resource_desc = #{resourceDesc,jdbcType=VARCHAR},
@@ -254,7 +284,9 @@
       operation_code = #{operationCode,jdbcType=VARCHAR},
       opetation_desc = #{opetationDesc,jdbcType=VARCHAR},
       app_name = #{appName,jdbcType=VARCHAR},
-      available = #{available,jdbcType=CHAR}
+      available = #{available,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

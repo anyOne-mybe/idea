@@ -3,12 +3,14 @@ package com.hrsj.demo.service.upload;
 
 import java.io.File;
 import java.util.List;
+
 import javax.inject.Named;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.hrsj.it.idea.core.upload.IFileUploadHandler;
+import com.idea.it.web.upload.IFileUploadHandler;
 
 /**
  * 类说明
