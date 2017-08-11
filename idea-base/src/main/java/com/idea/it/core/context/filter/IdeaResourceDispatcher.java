@@ -2,7 +2,6 @@
 package com.idea.it.core.context.filter;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,13 +10,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.context.WebApplicationContext;
-
 import com.idea.it.core.context.IdeaContext;
 import com.idea.it.core.context.constants.IdeaDispatcherConstants;
 import com.idea.it.core.context.manager.IdeaContextManager;
+import com.idea.it.core.menue.IMenueOperatable;
 import com.idea.it.core.permission.IPermissionOperateable;
 import com.idea.it.web.upload.IdeaFileUpload;
 
@@ -29,6 +26,7 @@ import com.idea.it.web.upload.IdeaFileUpload;
  */
 public class IdeaResourceDispatcher implements Filter
 {
+
     @Override
     public void init( FilterConfig filterConfig ) throws ServletException
     {
@@ -43,7 +41,7 @@ public class IdeaResourceDispatcher implements Filter
         HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse)res;
 
-        handleLocal( request, response );
+        handleThreadLocal( request, response );
 
         dispatchRequest( request, response, chain );
     }
@@ -58,62 +56,71 @@ public class IdeaResourceDispatcher implements Filter
             HttpServletResponse response, FilterChain chain )
             throws ServletException, IOException
     {
+        response.setCharacterEncoding( "utf-8" );
+
         String path = request.getServletPath();
+        String appName = IdeaContextManager.getIdeaContext().getAppName();
 
         // 文件上传
         if ( StringUtils.startsWith( path,
-                "/" + IdeaDispatcherConstants.IDEA_SERVLET_UPLOAD ) )
+                IdeaDispatcherConstants.IDEA_SERVLET_UPLOAD ) )
         {
-            handleFileUpload( request, response );
+            handleFileUpload( request, response, appName );
             return;
         }
 
         // 同步权限
         if ( StringUtils.startsWith( path,
-                "/" + IdeaDispatcherConstants.IDEA_SERVLET_PERMISSION ) )
+                IdeaDispatcherConstants.IDEA_SERVLET_PERMISSION ) )
         {
-            handleIdeaPremission( request, response );
+            handleIdeaPremission( request, response, appName );
+            return;
+        }
+
+        // 查询菜单
+        if ( StringUtils.startsWith( path,
+                IdeaDispatcherConstants.IDEA_MENUE ) )
+        {
+            handleIdeaMenue( request, response, appName );
             return;
         }
 
         chain.doFilter( request, response );
     }
 
-    private void handleIdeaPremission( HttpServletRequest request,
-            HttpServletResponse response )
+    private void handleIdeaMenue( HttpServletRequest request,
+            HttpServletResponse response, String appName ) throws IOException
     {
         IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
-        WebApplicationContext application = ideaContext.getApplicationContext();
-        IPermissionOperateable permissionScanner = application
+        IMenueOperatable menueOperater = ideaContext
+                .getBean( IMenueOperatable.class );
+
+        menueOperater.handleIdeaMenue( request, response, appName );
+    }
+
+    private void handleIdeaPremission( HttpServletRequest request,
+            HttpServletResponse response, String appName ) throws IOException
+    {
+        IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
+        IPermissionOperateable permissionScanner = ideaContext
                 .getBean( IPermissionOperateable.class );
 
-        String operateType = request.getParameter( "operateType" );
-        if ( StringUtils.equals( operateType, "update" ) )
-        {
-            // 同步权限
-            permissionScanner.syncIdeaPermission();
-        } else if ( StringUtils.equals( operateType, "delete" ) )
-        {
-            // 删除失效的权限
-            permissionScanner.deleteUnUsedPermission();
-        }
-
+        permissionScanner.handleIdeaPremission( request, response, appName );
     }
 
     private void handleFileUpload( HttpServletRequest request,
-            HttpServletResponse response ) throws ServletException, IOException
+            HttpServletResponse response, String appName )
+            throws ServletException, IOException
     {
         // 文件上传
         IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
-        WebApplicationContext application = ideaContext.getApplicationContext();
-
-        IdeaFileUpload fileUploadFactory = application
+        IdeaFileUpload fileUploadFactory = ideaContext
                 .getBean( IdeaFileUpload.class );
 
         fileUploadFactory.execute( request, response );
     }
 
-    private void handleLocal( HttpServletRequest request,
+    private void handleThreadLocal( HttpServletRequest request,
             HttpServletResponse response )
     {
         IdeaContextManager.setRequest( request );

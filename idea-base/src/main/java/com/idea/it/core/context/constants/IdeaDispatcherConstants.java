@@ -12,11 +12,16 @@ public interface IdeaDispatcherConstants
     /**
      * 文件上传
      */
-    String IDEA_SERVLET_UPLOAD = "ideaUpload";
+    String IDEA_SERVLET_UPLOAD = "/idea/upload";
 
     /**
      * 同步权限注解
      */
-    String IDEA_SERVLET_PERMISSION = "ideaUpdatePremission";
+    String IDEA_SERVLET_PERMISSION = "/idea/premission";
+
+    /**
+     * 栏目路径
+     */
+    String IDEA_MENUE = "/idea/menue";
 
 }

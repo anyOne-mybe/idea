@@ -1,6 +1,7 @@
 
 package com.idea.it.core.permission.support;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +10,10 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.idea.it.common.domain.ServiceResponse;
@@ -152,6 +156,23 @@ public class PermissionScanner implements IPermissionOperateable
                 resourceData.insert( resource );
             }
         }
+    }
+
+    @Override
+    public void handleIdeaPremission( HttpServletRequest request,
+            HttpServletResponse response, String appName ) throws IOException
+    {
+        String operateType = request.getParameter( "operateType" );
+        if ( StringUtils.equals( operateType, "update" ) )
+        {
+            // 同步权限
+            syncIdeaPermission();
+        } else if ( StringUtils.equals( operateType, "delete" ) )
+        {
+            // 删除失效的权限
+            deleteUnUsedPermission();
+        }
+
     }
 
 }

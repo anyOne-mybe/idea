@@ -1,6 +1,11 @@
 
 package com.idea.it.core.permission;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.idea.it.common.domain.ServiceResponse;
 
 /**
@@ -25,5 +30,8 @@ public interface IPermissionOperateable
      * @return
      */
     ServiceResponse<Boolean> deleteUnUsedPermission();
+
+    void handleIdeaPremission( HttpServletRequest request,
+            HttpServletResponse response, String appName ) throws IOException;
 
 }

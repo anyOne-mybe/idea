@@ -22,6 +22,10 @@ public class IdeaContextManager
 
     private static final ThreadLocal<HttpServletResponse> responseMaps = new ThreadLocal<>();
 
+    private IdeaContextManager()
+    {
+    }
+
     public static void setServletContext( ServletContext context )
     {
         if ( null == instance && null != context )

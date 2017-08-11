@@ -8,9 +8,8 @@ package com.idea.it.core.context;
 */
 
 import java.io.Serializable;
-
 import javax.servlet.ServletContext;
-
+import org.springframework.beans.BeansException;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -20,13 +19,25 @@ public class IdeaContext implements Serializable
     private static final long serialVersionUID = 8969928052686540964L;
     private ServletContext servletContext;
     private String appName;
+    private WebApplicationContext applicationContext;
 
     public WebApplicationContext getApplicationContext()
     {
-        WebApplicationContext application = WebApplicationContextUtils
-                .getRequiredWebApplicationContext( this.servletContext );
+        if ( this.applicationContext == null )
+        {
+            synchronized ( this )
+            {
+                if ( this.applicationContext == null )
+                {
+                    WebApplicationContext application = WebApplicationContextUtils
+                            .getRequiredWebApplicationContext(
+                                    this.servletContext );
+                    this.applicationContext = application;
+                }
+            }
+        }
 
-        return application;
+        return this.applicationContext;
     };
 
     public ServletContext getServletContext()
@@ -34,9 +45,9 @@ public class IdeaContext implements Serializable
         return servletContext;
     }
 
-    public void setServletContext( ServletContext servletContext )
+    public <T> T getBean( Class<T> requiredType ) throws BeansException
     {
-        this.servletContext = servletContext;
+        return getApplicationContext().getBean( requiredType );
     }
 
     public String getAppName()
@@ -47,6 +58,11 @@ public class IdeaContext implements Serializable
     public void setAppName( String appName )
     {
         this.appName = appName;
+    }
+
+    public void setServletContext( ServletContext servletContext )
+    {
+        this.servletContext = servletContext;
     }
 
 }
