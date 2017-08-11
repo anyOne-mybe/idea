@@ -33,7 +33,7 @@ public class TplUser {
 
     private Boolean available;
 
-    private Boolean createBy;
+    private Long createBy;
 
     private Date createTime;
 
@@ -161,11 +161,11 @@ public class TplUser {
         this.available = available;
     }
 
-    public Boolean getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Boolean createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
