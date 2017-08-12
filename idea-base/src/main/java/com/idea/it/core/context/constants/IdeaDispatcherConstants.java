@@ -24,4 +24,9 @@ public interface IdeaDispatcherConstants
      */
     String IDEA_MENUE = "/idea/menue";
 
+    /**
+     * 获取 workspaceVO
+     */
+    String IDEA_BUILD_ENVIRONMENT = "/idea/buildEnvironment";
+
 }

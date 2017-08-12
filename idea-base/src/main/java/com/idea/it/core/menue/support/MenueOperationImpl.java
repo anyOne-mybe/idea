@@ -30,21 +30,26 @@ public class MenueOperationImpl implements IMenueOperatable
     private IMenueData menueData;
 
     @Override
-    public void handleIdeaMenue( HttpServletRequest request,
+    public void handleRequest( HttpServletRequest request,
             HttpServletResponse response, String appName ) throws IOException
     {
         String operateType = request.getParameter( "operateType" );
         if ( StringUtils.equals( "query", operateType ) )
         {
             // 查询菜单
-            queryMenues( request, response, appName );
+            List<MenueVO> menueVOs = queryMenues( appName );
+
+            Gson gson = new Gson();
+            String menueJsonStr = gson.toJson( menueVOs );
+            response.getWriter().write( menueJsonStr );
+
             return;
         }
 
     }
 
-    private void queryMenues( HttpServletRequest request,
-            HttpServletResponse response, String appName ) throws IOException
+    @Override
+    public List<MenueVO> queryMenues( String appName )
     {
         List<Menue> menues = queryMenueByApplication( appName );
         // todo增加权限过滤
@@ -52,10 +57,7 @@ public class MenueOperationImpl implements IMenueOperatable
         // 菜单树
         List<MenueVO> menueVOs = treeMenues( menues );
 
-        Gson gson = new Gson();
-        String menueJsonStr = gson.toJson( menueVOs );
-
-        response.getWriter().write( menueJsonStr );
+        return menueVOs;
     }
 
     private List<Menue> queryMenueByApplication( String appName )

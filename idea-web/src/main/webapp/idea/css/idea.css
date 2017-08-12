@@ -16,5 +16,16 @@ ul, li {
 }
 
 .idea_header {
-	
+	border-bottom: 1px solid #b1a5a5;
+	box-shadow: 0px -10px 29px #000;
+}
+
+.nva_container>.nav_item {
+	display: inline-block;
+	vertical-align: top;
+	cursor: pointer;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 15px;
+	font-size: 15px;
 }

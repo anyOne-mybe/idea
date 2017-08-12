@@ -27,9 +27,12 @@
 			Idea.UI.loading();
 			//清空当前模块
 			_cleanUnUseModels();
+			var oldChange = window['onhashchange'];
+			window['onhashchange'] = null;
 			
 			window.location.hash = '#!' + uri;
-			$('#IdeaMainPanel').load(uri,function(){
+			$('#idea_mainContent').load(uri,function(){
+				window['onhashchange'] = oldChange;
 				Idea.UI.loadingClose();
 				//执行各模块的初始化方法
 				_executeModelsReady();

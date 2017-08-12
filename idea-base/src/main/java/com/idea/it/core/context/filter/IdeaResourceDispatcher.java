@@ -11,9 +11,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import com.idea.it.core.context.IIdeaServletHandler;
 import com.idea.it.core.context.IdeaContext;
 import com.idea.it.core.context.constants.IdeaDispatcherConstants;
 import com.idea.it.core.context.manager.IdeaContextManager;
+import com.idea.it.core.environment.IEnvironmentOperatable;
 import com.idea.it.core.menue.IMenueOperatable;
 import com.idea.it.core.permission.IPermissionOperateable;
 import com.idea.it.web.upload.IdeaFileUpload;
@@ -85,27 +87,44 @@ public class IdeaResourceDispatcher implements Filter
             return;
         }
 
+        if ( StringUtils.startsWith( path,
+                IdeaDispatcherConstants.IDEA_BUILD_ENVIRONMENT ) )
+        {
+            handleEnvironment( request, response, appName );
+            return;
+        }
+
         chain.doFilter( request, response );
+    }
+
+    private void handleEnvironment( HttpServletRequest request,
+            HttpServletResponse response, String appName ) throws IOException
+    {
+        IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
+        IIdeaServletHandler environmentBuilder = ideaContext
+                .getBean( IEnvironmentOperatable.class );
+
+        environmentBuilder.handleRequest( request, response, appName );
     }
 
     private void handleIdeaMenue( HttpServletRequest request,
             HttpServletResponse response, String appName ) throws IOException
     {
         IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
-        IMenueOperatable menueOperater = ideaContext
+        IIdeaServletHandler menueOperater = ideaContext
                 .getBean( IMenueOperatable.class );
 
-        menueOperater.handleIdeaMenue( request, response, appName );
+        menueOperater.handleRequest( request, response, appName );
     }
 
     private void handleIdeaPremission( HttpServletRequest request,
             HttpServletResponse response, String appName ) throws IOException
     {
         IdeaContext ideaContext = IdeaContextManager.getIdeaContext();
-        IPermissionOperateable permissionScanner = ideaContext
+        IIdeaServletHandler permissionScanner = ideaContext
                 .getBean( IPermissionOperateable.class );
 
-        permissionScanner.handleIdeaPremission( request, response, appName );
+        permissionScanner.handleRequest( request, response, appName );
     }
 
     private void handleFileUpload( HttpServletRequest request,

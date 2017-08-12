@@ -1,10 +1,10 @@
 
 package com.idea.it.core.menue;
 
-import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.idea.it.core.context.IIdeaServletHandler;
+import com.idea.it.core.menue.vo.MenueVO;
 
 /**
  * 类说明
@@ -12,9 +12,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author ****
  * @date 2017年8月11日 新建
  */
-public interface IMenueOperatable
+public interface IMenueOperatable extends IIdeaServletHandler
 {
 
-    void handleIdeaMenue( HttpServletRequest request,
-            HttpServletResponse response, String appName ) throws IOException;
+    /**
+     * 查询菜单栏目
+     * 
+     * @param appName
+     * @return
+     */
+    List<MenueVO> queryMenues( String appName );
 }

@@ -7,15 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
-
 import com.idea.it.common.domain.ServiceResponse;
 import com.idea.it.common.util.UserHelper;
 import com.idea.it.core.context.manager.IdeaContextManager;
@@ -33,6 +30,23 @@ public class PermissionScanner implements IPermissionOperateable
 
     @Inject
     private IResourceData resourceData;
+
+    @Override
+    public void handleRequest( HttpServletRequest request,
+            HttpServletResponse response, String appName ) throws IOException
+    {
+        String operateType = request.getParameter( "operateType" );
+        if ( StringUtils.equals( operateType, "update" ) )
+        {
+            // 同步权限
+            syncIdeaPermission();
+        } else if ( StringUtils.equals( operateType, "delete" ) )
+        {
+            // 删除失效的权限
+            deleteUnUsedPermission();
+        }
+
+    }
 
     @Override
     public ServiceResponse<Boolean> syncIdeaPermission()
@@ -156,23 +170,6 @@ public class PermissionScanner implements IPermissionOperateable
                 resourceData.insert( resource );
             }
         }
-    }
-
-    @Override
-    public void handleIdeaPremission( HttpServletRequest request,
-            HttpServletResponse response, String appName ) throws IOException
-    {
-        String operateType = request.getParameter( "operateType" );
-        if ( StringUtils.equals( operateType, "update" ) )
-        {
-            // 同步权限
-            syncIdeaPermission();
-        } else if ( StringUtils.equals( operateType, "delete" ) )
-        {
-            // 删除失效的权限
-            deleteUnUsedPermission();
-        }
-
     }
 
 }
