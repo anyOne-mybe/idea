@@ -35,10 +35,46 @@ ul, li {
 	position: relative;
 }
 
+.nav_item:hover .sub_menue_container {
+	display: block;
+}
+
 .sub_menue_container {
 	position: absolute;
 	border: solid 1px #ebebeb;
 	box-shadow: 4px 7px 16px rgba(0, 0, 0, .32);
-	padding: 5px 8px;
-	top: 39px;
+	padding: 10px 10px 10px 10px;
+	width: 100%;
+	border: solid 1px #ebebeb;
+	box-shadow: 4px 7px 16px rgba(0, 0, 0, .32);
+	margin-top: -2px;
+	background: white;
+	display: none;
+	cursor: default;
+}
+
+.sub_menue_container:after {
+	content: '';
+	position: absolute;
+	border: 8px solid transparent;
+	border-bottom: 8px solid white;
+	top: -14px;
+	left: 50%;
+	margin-left: -8px;
+}
+
+.sub_menue_container:before {
+	content: '';
+	position: absolute;
+	border: 8px solid transparent;
+	border-bottom: 8px solid #ebebeb;
+	top: -16px;
+	left: 50%;
+	margin-left: -8px;
+}
+
+.sub_item {
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
 }

@@ -43,7 +43,17 @@
 	function addMenue(node,$menuedDoms){
 		var nodeDom = [];
 		nodeDom.push('<div class="nav_item"><span class="nav_name">'+node.name);
-		nodeDom.push('</span></div>');
+		nodeDom.push('</span>');
+		var children = node.children || [],
+		subNode = null;
+		nodeDom.push('<div class="sub_menue_container">');
+		for(var i = 0; i < children.length; i++){
+			subNode = children[i];
+			nodeDom.push('<div class="sub_item">'+subNode.name+'</div>');
+		}
+		nodeDom.push('</div>');
+		
+		nodeDom.push('</div>');
 		
 		var $node = $(nodeDom.join(''));
 		$node.data('value',node).appendTo($menuedDoms);
@@ -56,7 +66,6 @@
 		});
 		
 		$menuedDoms.on('mouseenter','.nav_item',function(e){
-			debugger;
 			var $this = $(this);
 			var data = $this.data('value');
 			//展示子菜单
@@ -64,39 +73,14 @@
 			
 //			Idea.Page.forward($this.data('value').url);
 		});
-		
-		$menuedDoms.on('mouseleave','.nav_item',function(e){
-			debugger;
-			var $this = $(this);
-			var data = $this.data('value');
-			//展示子菜单
-			_hideSunMenues($this,data);
-			
-//			Idea.Page.forward($this.data('value').url);
-		});
 	};
 	
-	function _showSunMenues($menue,node){
-		if($menue.find('.sub_menue_container').length <= 0){
-			var subDom = [],
-			children = node.children || [],
-			subNode = null;
-			subDom.push('<div class="sub_menue_container">');
-			for(var i = 0; i < children.length; i++){
-				subNode = children[i];
-				subDom.push('<div class="sub_item">'+subNode.name+'</div>');
-			}
-			subDom.push('</div>');
-			
-			$menue.append(subDom.join(''));
-		}else{
-			$menue.find('.sub_menue_container').removeClass('idra_hide');
-		}
+	function _showSunMenues($menue){
+		var $target = $menue.find('.sub_menue_container');
+		var width = $target.outerWidth();
+		$target.css({left:-(width/2) + $menue.outerWidth()/2})
 	};
-	
-	function _hideSunMenues($menue,node){
-		$menue.find('.sub_menue_container').addClass('idra_hide');
-	};
+
 	
 	
 	
