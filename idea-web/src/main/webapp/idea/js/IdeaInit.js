@@ -23,7 +23,13 @@
 	};
 	
 	function _initIdeaEnvironment(response){
+		_initLogo();
+		
 		_initMenues(response.menueNodes);
+	};
+	
+	function _initLogo(){
+		$('#idea_nav').append('<div class="idea_logo"><img src="idea/images/logo.png"/></div>');
 	};
 	
 	function _initMenues(menueNodes){
@@ -42,14 +48,14 @@
 	
 	function addMenue(node,$menuedDoms){
 		var nodeDom = [];
-		nodeDom.push('<div class="nav_item"><span class="nav_name">'+node.name);
+		nodeDom.push('<div class="nav_item"><span class="nav_name" data_hash="'+node.url+'">'+node.name);
 		nodeDom.push('</span>');
 		var children = node.children || [],
 		subNode = null;
 		nodeDom.push('<div class="sub_menue_container">');
 		for(var i = 0; i < children.length; i++){
 			subNode = children[i];
-			nodeDom.push('<div class="sub_item">'+subNode.name+'</div>');
+			nodeDom.push('<div class="sub_item"><span class="nav_name" data_hash="'+subNode.url+'">'+subNode.name+'</span></div>');
 		}
 		nodeDom.push('</div>');
 		
@@ -60,9 +66,12 @@
 	};
 	
 	function _bindMenueEvent($menuedDoms){
-		$menuedDoms.on('click','.nav_item',function(e){
+		$menuedDoms.on('click','.nav_name',function(e){
 			var $this = $(this);
-			Idea.Page.forward($this.data('value').url);
+			var url = $this.attr('data_hash');
+			if(url){
+				Idea.Page.forward(url);
+			}
 		});
 		
 		$menuedDoms.on('mouseenter','.nav_item',function(e){
@@ -70,19 +79,16 @@
 			var data = $this.data('value');
 			//展示子菜单
 			_showSunMenues($this,data);
-			
-//			Idea.Page.forward($this.data('value').url);
 		});
 	};
 	
-	function _showSunMenues($menue){
+	function _showSunMenues($menue,node){
 		var $target = $menue.find('.sub_menue_container');
-		var width = $target.outerWidth();
-		$target.css({left:-(width/2) + $menue.outerWidth()/2})
+		if(node.children && node.children.length > 0){
+			var width = $target.outerWidth();
+			$target.css({left:-(width/2) + $menue.outerWidth()/2})
+		}else{
+			$target.remove();
+		}
 	};
-
-	
-	
-	
-	
 });

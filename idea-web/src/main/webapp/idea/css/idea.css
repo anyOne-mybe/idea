@@ -24,15 +24,27 @@ ul, li {
 	box-shadow: 0px -10px 29px #000;
 }
 
+.idea_header>div {
+	display: inline-block;
+	vertical-align: top;
+}
+
 .nva_container>.nav_item {
 	display: inline-block;
 	vertical-align: top;
-	cursor: pointer;
-	height: 40px;
-	line-height: 40px;
+	height: 42px;
+	line-height: 42px;
 	padding: 0 15px;
 	font-size: 15px;
 	position: relative;
+}
+
+.nav_item.active {
+	border-bottom: 2px solid #ff3c00;
+}
+
+.nav_item>.nav_name {
+	cursor: pointer;
 }
 
 .nav_item:hover .sub_menue_container {
@@ -43,8 +55,7 @@ ul, li {
 	position: absolute;
 	border: solid 1px #ebebeb;
 	box-shadow: 4px 7px 16px rgba(0, 0, 0, .32);
-	padding: 10px 10px 10px 10px;
-	width: 100%;
+	width: 100px;
 	border: solid 1px #ebebeb;
 	box-shadow: 4px 7px 16px rgba(0, 0, 0, .32);
 	margin-top: -2px;
@@ -74,7 +85,24 @@ ul, li {
 }
 
 .sub_item {
-	height: 30px;
-	line-height: 30px;
+	height: 20px;
+	line-height: 20px;
 	cursor: pointer;
+	padding: 0 10px;
+	margin: 5px 0;
+	text-align: center;
+}
+
+.sub_item:hover .nav_name, .nav_item:hover>.nav_name {
+	color: #ff3c00;
+	text-decoration: underline;
+}
+
+.idea_logo {
+	padding: 0 15px 0 50px;
+}
+
+.idea_logo>img {
+	width: 55px;
+	height: 40px;
 }

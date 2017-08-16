@@ -25,6 +25,9 @@
 	function _forward(uri){
 		if($.trim(uri)){
 			Idea.UI.loading();
+			
+			_updateMenueActive(uri);
+			
 			//清空当前模块
 			_cleanUnUseModels();
 			var oldChange = window['onhashchange'];
@@ -430,6 +433,38 @@
 			$user.find('.user-logout').html('退出').removeClass('app-off').addClass('app-on');
 			$user.show();
 		}
+	};
+	
+	function _updateMenueActive(url){
+		debugger;
+		setTimeout(function(){
+			var $menues = $('#idea_nav').find('.nav_item');
+			var $item = null,
+			nodeData = null;
+			for(var i = 0; i < $menues.length; i++){
+				$item = $($menues[i]);
+				nodeData = $item.data('value');
+				if(isInNode(nodeData,url)){
+					$item.addClass('active').siblings().removeClass('active');
+					return;
+				}
+			}
+		},26);
+	};
+	
+	function isInNode(node,url){
+		if(node.url === url){
+			return true;
+		}
+		
+		var children = node.children || [];
+		for(var i = 0; i < children.length; i++){
+			if(isInNode(children[i],url)){
+				return true;
+			}
+		}
+		
+		return false;
 	};
 	
 	/****   工具 *******/
