@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://cxf.apache.org/jaxrs
-       http://cxf.apache.org/schemas/jaxrs.xsd">
+       http://cxf.apache.org/schemas/jaxrs.xsd
+        http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+
+
 
 	<jaxrs:server address="/action">
 		<jaxrs:serviceBeans>
@@ -22,6 +27,17 @@
 			<ref bean="jsonProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
+
+	<!-- <jaxws:endpoint implementor="#bookAction" address="/book"> -->
+	<!-- <jaxws:outInterceptors></jaxws:outInterceptors> -->
+	<!-- </jaxws:endpoint> -->
+
+	<jaxws:client id="outerTest" serviceClass="com.guan.action.IBookAction"
+		address="http://localhost:8081/book">
+	</jaxws:client>
+
+
+
 
 	<bean id="cxfOutLogger" class="org.apache.cxf.interceptor.LoggingOutInterceptor">
 	</bean>
