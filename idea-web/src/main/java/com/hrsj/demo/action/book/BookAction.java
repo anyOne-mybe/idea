@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
-import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+
+import com.hrsj.demo.actionxx.book.IBookAction;
 
 /**
  * 类说明
@@ -14,9 +15,8 @@ import javax.xml.ws.Endpoint;
  * @author ****
  * @date 2017年8月17日 新建
  */
-// @Named
-// @WebService( serviceName = "BookAction" )
-public class BookAction
+@Named
+public class BookAction implements IBookAction
 {
 
     // @Override

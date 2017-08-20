@@ -28,12 +28,26 @@
 		</jaxrs:providers>
 	</jaxrs:server>
 
-	<!-- <jaxws:endpoint implementor="#bookAction" address="/book"> -->
-	<!-- <jaxws:outInterceptors></jaxws:outInterceptors> -->
-	<!-- </jaxws:endpoint> -->
+	<jaxws:endpoint implementor="#bookAction" address="/book">
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+				<constructor-arg>
+					<map>
+						<entry key="action" value="UserNameToken">
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors></jaxws:outInterceptors>
+	</jaxws:endpoint>
 
 	<jaxws:client id="outerTest" serviceClass="com.guan.action.IBookAction"
 		address="http://localhost:8081/book">
+		<jaxws:outInterceptors>
+			<ref bean="bookIntecepter" />
+			<ref bean="cxfOutLogger" />
+		</jaxws:outInterceptors>
 	</jaxws:client>
 
 

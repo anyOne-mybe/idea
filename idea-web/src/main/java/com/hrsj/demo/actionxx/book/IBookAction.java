@@ -1,5 +1,5 @@
 
-package com.guan.action;
+package com.hrsj.demo.actionxx.book;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -12,9 +12,8 @@ import com.hrsj.demo.action.book.Book;
  * @author ****
  * @date 2017年8月17日 新建
  */
-@WebService( )
+@WebService( serviceName = "BookAction", targetNamespace = "action.guan.com" )
 public interface IBookAction
 {
-    Book queryBookByName( @WebParam( name = "bookName" ) String string );
-
+    Book queryBookByName( @WebParam( name = "bookName" ) String name );
 }

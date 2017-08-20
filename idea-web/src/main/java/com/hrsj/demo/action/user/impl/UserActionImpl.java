@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.guan.action.IBookAction;
 import com.hrsj.demo.action.book.Book;
-
 import com.hrsj.demo.action.user.IUserAction;
 import com.hrsj.demo.domain.common.PagedResult;
 import com.hrsj.demo.domain.common.Pager;
@@ -39,8 +38,9 @@ public class UserActionImpl implements IUserAction
     @IdeaOperation( policy = Policy.Required, code = "getUserById", desc = "根据id查询用户" )
     public ServiceResponse<User> getUserById( Long userId )
     {
-        System.out.println( "111111" );
+
         Book data = bookaction.queryBookByName( "" );
+        System.out.println( "111111" );
         return userFacade.getUserById( userId );
     }
 
