@@ -40,6 +40,7 @@ public class UserActionImpl implements IUserAction
     {
 
         Book data = bookaction.queryBookByName( "" );
+        System.out.println( data.getName() );
         System.out.println( "111111" );
         return userFacade.getUserById( userId );
     }

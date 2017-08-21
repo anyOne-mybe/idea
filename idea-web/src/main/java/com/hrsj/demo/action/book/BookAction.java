@@ -7,7 +7,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.xml.ws.Endpoint;
 
-import com.hrsj.demo.actionxx.book.IBookAction;
+import com.guan.action.IBookAction;
 
 /**
  * 类说明
@@ -15,11 +15,11 @@ import com.hrsj.demo.actionxx.book.IBookAction;
  * @author ****
  * @date 2017年8月17日 新建
  */
-@Named
+//@Named
 public class BookAction implements IBookAction
 {
 
-    // @Override
+    @Override
     public Book queryBookByName( String name )
     {
         System.out.println( name );

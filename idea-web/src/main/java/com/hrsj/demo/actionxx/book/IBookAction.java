@@ -12,7 +12,7 @@ import com.hrsj.demo.action.book.Book;
  * @author ****
  * @date 2017年8月17日 新建
  */
-@WebService( serviceName = "BookAction", targetNamespace = "action.guan.com" )
+@WebService( serviceName = "IBookActionxxx", targetNamespace = "action.guan.com" )
 public interface IBookAction
 {
     Book queryBookByName( @WebParam( name = "bookName" ) String name );

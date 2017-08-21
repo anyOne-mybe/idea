@@ -65,9 +65,58 @@ public class BookIntecepter extends AbstractSoapInterceptor
         root.appendChild( org_Id );
         // 创建SoapHeader内容
 
-        SoapHeader header = new SoapHeader( qName, root );
+        // 添加登陆token
+        addUserTokenHeader( message );
+
         // 添加SoapHeader内容
-        // message.getHeaders().add( header );
+        SoapHeader header = new SoapHeader( qName, root );
+        message.getHeaders().add( header );
+
+    }
+
+    private void addUserTokenHeader( SoapMessage message )
+    {
+
+        QName qName = new QName( "wsse:Security" );
+
+        Document doc = DOMUtils.createDocument();
+        // 验证用户名
+        Element userNameToken = doc.createElement( "wsse:UsernameToken" );
+        userNameToken.setAttribute( "wsu:Id",
+                "UsernameToken-DC9443B36DD2FA9A5B15032799807651" );
+
+        Element userName = doc.createElement( "wsse:Username" );
+        userName.setTextContent( "MJZYADMIN" );
+        userNameToken.appendChild( userName );
+
+        Element password = doc.createElement( "wsse:Password" );
+        password.setAttribute( "Type",
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText" );
+        password.setTextContent( "2356ku2398" );
+        userNameToken.appendChild( password );
+
+        Element nonce = doc.createElement( "wsse:Nonce" );
+        nonce.setAttribute( "EncodingType",
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" );
+        nonce.setTextContent( "dbU8RbOSzxj20t4vH69IBg==" );
+        userNameToken.appendChild( nonce );
+
+        Element created = doc.createElement( "wsse:Created" );
+        created.setTextContent( "2017-08-21T01:46:20.764Z" );
+        userNameToken.appendChild( created );
+
+        Element root = doc.createElementNS(
+                "xmlns:wsse=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+                "wsse:Security" );
+        root.setAttribute( "xmlns:wsu",
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" );
+
+        root.setAttribute( "soapenv:mustUnderstand", "1" );
+
+        root.appendChild( userNameToken );
+
+        SoapHeader header = new SoapHeader( qName, root );
+        message.getHeaders().add( header );
     }
 
     private void aaa()
