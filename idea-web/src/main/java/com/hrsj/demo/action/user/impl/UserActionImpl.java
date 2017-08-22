@@ -11,8 +11,6 @@ import javax.inject.Named;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import com.guan.action.IBookAction;
-import com.hrsj.demo.action.book.Book;
 import com.hrsj.demo.action.user.IUserAction;
 import com.hrsj.demo.domain.common.PagedResult;
 import com.hrsj.demo.domain.common.Pager;
@@ -23,25 +21,18 @@ import com.idea.it.core.permission.annotation.IdeaOperation;
 import com.idea.it.core.permission.annotation.IdeaResource;
 import com.idea.it.core.permission.enume.Policy;
 
-@IdeaResource( code = "demo.user", desc = "用户模块" )
 @Named
+@IdeaResource( code = "demo.user", desc = "用户模块" )
 public class UserActionImpl implements IUserAction
 {
 
     @Inject
     private IUserFacade userFacade;
 
-    @Inject
-    private IBookAction bookaction;
-
     @Override
     @IdeaOperation( policy = Policy.Required, code = "getUserById", desc = "根据id查询用户" )
     public ServiceResponse<User> getUserById( Long userId )
     {
-
-        Book data = bookaction.queryBookByName( "" );
-        System.out.println( data.getName() );
-        System.out.println( "111111" );
         return userFacade.getUserById( userId );
     }
 

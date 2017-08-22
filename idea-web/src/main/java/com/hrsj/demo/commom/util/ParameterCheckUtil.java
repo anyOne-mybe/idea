@@ -3,8 +3,8 @@ package com.hrsj.demo.commom.util;
 
 import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.hrsj.demo.commom.constants.ErrooCode;
 import com.hrsj.demo.commom.exception.PamaterCheckException;
 
@@ -17,8 +17,8 @@ import com.hrsj.demo.commom.exception.PamaterCheckException;
 public class ParameterCheckUtil
 {
 
-    private static final Log logger = LogFactory
-            .getLog( ParameterCheckUtil.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( ParameterCheckUtil.class );
 
     public static <T> void checkPameterNotNull( T value, String fieldName )
     {
