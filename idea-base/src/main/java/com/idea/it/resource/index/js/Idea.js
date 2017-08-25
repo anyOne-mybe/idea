@@ -488,13 +488,11 @@
 				nvaDom.push('<span class="level2">'+node.name+'</span>');
 				
 				document.title = node.name;
+				$("#idea_crumbs").html(nvaDom.join(''));
 				break;
 			}
 			
-			if(hasFind){
-				$("#idea_crumbs").html(nvaDom.join(''));
-				return;
-			}else{
+			if(!hasFind){
 				subChildren = node.children || [];
 				for(var j = 0; j < subChildren.length; j++){
 					subNode = subChildren[i];
@@ -506,13 +504,13 @@
 						nvaDom.push('<span class="level2">'+node.name+'</span>');
 						nvaDom.push('<span class="sepleter">></span>');
 						nvaDom.push('<span class="level3">'+subNode.name+'</span>');
+						
 						document.title = subNode.name;
+						$("#idea_crumbs").html(nvaDom.join(''));
 						break;
 					}
 				}
 			}
-			
-			$("#idea_crumbs").html(nvaDom.join(''));
 		}
 		
 	};
