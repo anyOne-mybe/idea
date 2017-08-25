@@ -1,10 +1,11 @@
 
-package com.idea.it.core.menue.data;
+package com.idea.it.core.menue.data.impl;
 
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.idea.it.core.menue.dao.MenueMapper;
+import com.idea.it.core.menue.data.IMenueData;
 import com.idea.it.core.menue.domain.Menue;
 import com.idea.it.core.menue.domain.MenueExample;
 import com.idea.it.core.menue.domain.MenueExample.Criteria;
