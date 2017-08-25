@@ -3,18 +3,15 @@ package com.idea.it.core.permission.data.impl;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.springframework.util.CollectionUtils;
-
 import com.idea.it.core.permission.constant.ServiceType;
-import com.idea.it.core.permission.dao.ResourceVOMapper;
+import com.idea.it.core.permission.dao.ResourceMapper;
 import com.idea.it.core.permission.data.IResourceData;
-import com.idea.it.core.permission.domain.ResourceVO;
-import com.idea.it.core.permission.domain.ResourceVOExample;
-import com.idea.it.core.permission.domain.ResourceVOExample.Criteria;
+import com.idea.it.core.permission.domain.Resource;
+import com.idea.it.core.permission.domain.ResourceExample;
+import com.idea.it.core.permission.domain.ResourceExample.Criteria;
 
 /**
  * 类说明
@@ -26,20 +23,20 @@ import com.idea.it.core.permission.domain.ResourceVOExample.Criteria;
 public class ResourceDataImpl implements IResourceData
 {
     @Inject
-    private ResourceVOMapper resourceVOMapper;
+    private ResourceMapper ResourceMapper;
 
     @Override
-    public ResourceVO queryResoure( String resoucreCode, String resourceType,
+    public Resource queryResoure( String resoucreCode, String resourceType,
             String operationCode, String appName )
     {
-        ResourceVOExample example = new ResourceVOExample();
+        ResourceExample example = new ResourceExample();
         Criteria criteria = example.createCriteria();
         criteria.andResourceCodeEqualTo( resoucreCode );
-        criteria.andResourceTypeEqualTo( resourceType );
-        criteria.andOperationCodeEqualTo( operationCode );
+        criteria.andTypeEqualTo( resourceType );
+        criteria.andOperateCodeEqualTo( operationCode );
         criteria.andAppNameEqualTo( appName );
 
-        List<ResourceVO> datas = resourceVOMapper.selectByExample( example );
+        List<Resource> datas = ResourceMapper.selectByExample( example );
         if ( !CollectionUtils.isEmpty( datas ) )
         {
             return datas.get( 0 );
@@ -49,53 +46,52 @@ public class ResourceDataImpl implements IResourceData
     }
 
     @Override
-    public void updateResource( ResourceVO resource )
+    public void updateResource( Resource resource )
     {
-        ResourceVOExample example = new ResourceVOExample();
+        ResourceExample example = new ResourceExample();
         Criteria criteria = example.createCriteria();
         criteria.andResourceCodeEqualTo( resource.getResourceCode() );
-        criteria.andResourceTypeEqualTo( ServiceType.SERVICE );
-        criteria.andOperationCodeEqualTo( resource.getOperationCode() );
+        criteria.andTypeEqualTo( ServiceType.SERVICE );
+        criteria.andOperateCodeEqualTo( resource.getOperateCode() );
 
-        resourceVOMapper.updateByExample( resource, example );
+        ResourceMapper.updateByExample( resource, example );
     }
 
     @Override
-    public void insert( ResourceVO resource )
+    public void insert( Resource resource )
     {
-        resourceVOMapper.insert( resource );
+        ResourceMapper.insert( resource );
     }
 
     @Override
     public void deleteApplicationResourceByServiceType( String resourceType,
             String appName )
     {
-        ResourceVOExample example = new ResourceVOExample();
+        ResourceExample example = new ResourceExample();
         Criteria criteria = example.createCriteria();
-        criteria.andResourceTypeEqualTo( resourceType );
+        criteria.andTypeEqualTo( resourceType );
         criteria.andAppNameEqualTo( appName );
 
-        resourceVOMapper.deleteByExample( example );
+        ResourceMapper.deleteByExample( example );
     }
 
     @Override
     public void disableApplicationResourceByServiceType( String resourceType,
             String appName )
     {
-        ResourceVOExample example = new ResourceVOExample();
+        ResourceExample example = new ResourceExample();
         Criteria criteria = example.createCriteria();
-        criteria.andResourceTypeEqualTo( resourceType );
+        criteria.andTypeEqualTo( resourceType );
         criteria.andAppNameEqualTo( appName );
 
-        List<ResourceVO> resources = resourceVOMapper
-                .selectByExample( example );
+        List<Resource> resources = ResourceMapper.selectByExample( example );
         Date currentTime = new Date();
 
-        for ( ResourceVO resourceVO : resources )
+        for ( Resource Resource : resources )
         {
-            resourceVO.setAvailable( false );
-            resourceVO.setUpdateTime( currentTime );
-            resourceVOMapper.updateByPrimaryKey( resourceVO );
+            Resource.setAvailable( false );
+            Resource.setUpdateDate( currentTime );
+            ResourceMapper.updateByPrimaryKey( Resource );
         }
     }
 
@@ -103,13 +99,13 @@ public class ResourceDataImpl implements IResourceData
     public void deleteDisableApplicationResourceByServiceType(
             String resourceType, String appName )
     {
-        ResourceVOExample example = new ResourceVOExample();
+        ResourceExample example = new ResourceExample();
         Criteria criteria = example.createCriteria();
-        criteria.andResourceTypeEqualTo( resourceType );
+        criteria.andTypeEqualTo( resourceType );
         criteria.andAppNameEqualTo( appName );
         criteria.andAvailableEqualTo( false );
 
-        resourceVOMapper.deleteByExample( example );
+        ResourceMapper.deleteByExample( example );
     }
 
 }

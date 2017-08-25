@@ -1,13 +1,14 @@
 
 package com.idea.it.core.permission.data;
+
+import com.idea.it.core.permission.domain.Resource;
+
 /**  
 * 类说明   
 *  
 * @author ****  
 * @date 2017年8月10日  新建  
 */
-
-import com.idea.it.core.permission.domain.ResourceVO;
 
 public interface IResourceData
 {
@@ -22,7 +23,7 @@ public interface IResourceData
      * @return
      */
 
-    ResourceVO queryResoure( String resoucreCode, String resourceType,
+    Resource queryResoure( String resoucreCode, String resourceType,
             String operationCode, String appName );
 
     /**
@@ -30,14 +31,14 @@ public interface IResourceData
      * 
      * @param resource
      */
-    void updateResource( ResourceVO resource );
+    void updateResource( Resource resource );
 
     /**
      * 插入资源
      * 
      * @param resource
      */
-    void insert( ResourceVO resource );
+    void insert( Resource resource );
 
     /**
      * 删除系统某种资源

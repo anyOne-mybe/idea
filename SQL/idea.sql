@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/25 13:40:11                           */
+/* Created on:     2017/8/25 15:24:11                           */
 /*==============================================================*/
 
 
@@ -43,9 +43,9 @@ CREATE TABLE IDEA_TPL_RESOURCES
    OPERATE_CODE         VARCHAR(100),
    OPERATE_NAME         VARCHAR(100),
    CREATE_DATE          DATETIME,
-   创建人                  INT(10),
-   更新日期                 DATETIME,
-   更新人                  INT(10),
+   CREATE_BY            INT(10),
+   UPDATE_DATE          DATETIME,
+   UPDATE_BY            INT(10),
    AVAILABLE            CHAR,
    APP_NAME             VARCHAR(100),
    PRIMARY KEY (ID)
@@ -65,7 +65,7 @@ CREATE TABLE IDEA_TPL_USER
    EMAIL                VARCHAR(100),
    SEX                  CHAR,
    AGE                  INT,
-   WEB_CHAT             VARCHAR(50),
+   WEB_CHAT             VARCHAR(50) COMMENT '微信',
    QQ                   VARCHAR(20),
    IDENTITY_CARD        VARCHAR(20),
    BIRTHDAY             DATE,

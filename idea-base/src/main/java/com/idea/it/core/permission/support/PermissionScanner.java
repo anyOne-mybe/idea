@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
+
 import com.idea.it.common.domain.ServiceResponse;
 import com.idea.it.common.util.UserHelper;
 import com.idea.it.core.context.manager.IdeaContextManager;
@@ -21,7 +24,7 @@ import com.idea.it.core.permission.annotation.IdeaOperation;
 import com.idea.it.core.permission.annotation.IdeaResource;
 import com.idea.it.core.permission.constant.ServiceType;
 import com.idea.it.core.permission.data.IResourceData;
-import com.idea.it.core.permission.domain.ResourceVO;
+import com.idea.it.core.permission.domain.Resource;
 import com.idea.it.core.user.domain.TplUser;
 
 @Named
@@ -51,7 +54,7 @@ public class PermissionScanner implements IPermissionOperateable
     @Override
     public ServiceResponse<Boolean> syncIdeaPermission()
     {
-        List<ResourceVO> resourceLists = scanIdeaResources();
+        List<Resource> resourceLists = scanIdeaResources();
 
         saveOrUpdateResources( resourceLists );
 
@@ -68,7 +71,7 @@ public class PermissionScanner implements IPermissionOperateable
                 ServiceType.SERVICE, appName );
 
         // 更新资源
-        List<ResourceVO> resourceLists = scanIdeaResources();
+        List<Resource> resourceLists = scanIdeaResources();
         saveOrUpdateResources( resourceLists );
 
         // 删除未被更新的资源
@@ -80,22 +83,22 @@ public class PermissionScanner implements IPermissionOperateable
         return null;
     }
 
-    private List<ResourceVO> scanIdeaResources()
+    private List<Resource> scanIdeaResources()
     {
         WebApplicationContext application = IdeaContextManager.getIdeaContext()
                 .getApplicationContext();
         Map<String, Object> resourceBeans = application
                 .getBeansWithAnnotation( IdeaResource.class );
 
-        List<ResourceVO> resourceLists = parseResourecsBeans( resourceBeans );
+        List<Resource> resourceLists = parseResourecsBeans( resourceBeans );
 
         return resourceLists;
     }
 
-    private List<ResourceVO> parseResourecsBeans(
+    private List<Resource> parseResourecsBeans(
             Map<String, Object> resourceBeans )
     {
-        List<ResourceVO> resources = new ArrayList<>( resourceBeans.size() );
+        List<Resource> resources = new ArrayList<>( resourceBeans.size() );
         String className = null;
         String beanName = null;
         for ( Map.Entry<String, Object> entry : resourceBeans.entrySet() )
@@ -108,10 +111,10 @@ public class PermissionScanner implements IPermissionOperateable
         return resources;
     }
 
-    private void addToResource( String className, List<ResourceVO> resources )
+    private void addToResource( String className, List<Resource> resources )
     {
         Class<?> clazz = null;
-        ResourceVO resource = null;
+        Resource resource = null;
         String resourceCode = null;
         String resourceDesc = null;
         try
@@ -129,13 +132,13 @@ public class PermissionScanner implements IPermissionOperateable
                 operation = m.getAnnotation( IdeaOperation.class );
                 if ( null != operation )
                 {
-                    resource = new ResourceVO();
+                    resource = new Resource();
                     resource.setAppName( appName );
-                    resource.setResourceType( ServiceType.SERVICE );
+                    resource.setType( ServiceType.SERVICE );
                     resource.setResourceCode( resourceCode );
-                    resource.setResourceDesc( resourceDesc );
-                    resource.setOperationCode( operation.code() );
-                    resource.setOpetationDesc( operation.desc() );
+                    resource.setResourceName( resourceDesc );
+                    resource.setOperateCode( operation.code() );
+                    resource.setOperateName( operation.desc() );
                     resources.add( resource );
                 }
             }
@@ -147,19 +150,19 @@ public class PermissionScanner implements IPermissionOperateable
 
     }
 
-    private void saveOrUpdateResources( List<ResourceVO> resources )
+    private void saveOrUpdateResources( List<Resource> resources )
     {
-        ResourceVO dbResourcesVO = null;
+        Resource dbResourcesVO = null;
         Date currentTime = new Date();
         TplUser user = UserHelper.getCurrentUser();
-        for ( ResourceVO resource : resources )
+        for ( Resource resource : resources )
         {
             dbResourcesVO = resourceData.queryResoure(
                     resource.getResourceCode(), ServiceType.SERVICE,
-                    resource.getOperationCode(), resource.getAppName() );
+                    resource.getOperateCode(), resource.getAppName() );
             resource.setAvailable( true );
-            resource.setUpdateTime( currentTime );
-            resource.setUpdateBy( user.getUserId() );
+            resource.setUpdateDate( currentTime );
+            resource.setUpdateBy( user.getId() );
 
             if ( null != dbResourcesVO )
             {

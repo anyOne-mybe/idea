@@ -2,20 +2,22 @@ package com.idea.it.core.permission.domain;
 
 import java.util.Date;
 
-public class UserToRole {
+public class User2Role {
     private Long id;
 
     private Long userId;
 
     private Long roleId;
 
+    private Date createTime;
+
+    private Long createBy;
+
     private Date updateTime;
 
     private Long updateBy;
 
-    private Long createBy;
-
-    private Date createTime;
+    private String appName;
 
     public Long getId() {
         return id;
@@ -41,6 +43,22 @@ public class UserToRole {
         this.roleId = roleId;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Long createBy) {
+        this.createBy = createBy;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -57,19 +75,11 @@ public class UserToRole {
         this.updateBy = updateBy;
     }
 
-    public Long getCreateBy() {
-        return createBy;
+    public String getAppName() {
+        return appName;
     }
 
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setAppName(String appName) {
+        this.appName = appName == null ? null : appName.trim();
     }
 }

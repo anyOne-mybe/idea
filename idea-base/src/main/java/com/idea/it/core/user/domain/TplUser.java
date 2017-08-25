@@ -3,11 +3,11 @@ package com.idea.it.core.user.domain;
 import java.util.Date;
 
 public class TplUser {
-    private Long userId;
+    private Long id;
 
-    private String userName;
+    private String name;
 
-    private String userAccount;
+    private String account;
 
     private String password;
 
@@ -23,46 +23,42 @@ public class TplUser {
 
     private String identityCard;
 
-    private Integer year;
+    private Date birthday;
 
-    private Integer month;
-
-    private Integer day;
-
-    private Long addressId;
+    private Integer addressId;
 
     private Boolean available;
 
-    private Long createBy;
+    private Date createDate;
 
-    private Date createTime;
+    private Integer createBy;
 
-    private Long updateBy;
+    private Date updateDate;
 
-    private Date updateTime;
+    private Integer updateBy;
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getUserAccount() {
-        return userAccount;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserAccount(String userAccount) {
-        this.userAccount = userAccount == null ? null : userAccount.trim();
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
     }
 
     public String getPassword() {
@@ -121,35 +117,19 @@ public class TplUser {
         this.identityCard = identityCard == null ? null : identityCard.trim();
     }
 
-    public Integer getYear() {
-        return year;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-
-    public Integer getDay() {
-        return day;
-    }
-
-    public void setDay(Integer day) {
-        this.day = day;
-    }
-
-    public Long getAddressId() {
+    public Integer getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(Long addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
 
@@ -161,35 +141,35 @@ public class TplUser {
         this.available = available;
     }
 
-    public Long getCreateBy() {
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Integer getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Long createBy) {
+    public void setCreateBy(Integer createBy) {
         this.createBy = createBy;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public Long getUpdateBy() {
+    public Integer getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Long updateBy) {
+    public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 }

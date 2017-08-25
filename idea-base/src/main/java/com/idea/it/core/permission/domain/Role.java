@@ -3,36 +3,38 @@ package com.idea.it.core.permission.domain;
 import java.util.Date;
 
 public class Role {
-    private Integer id;
+    private Long id;
 
-    private String roleName;
+    private String name;
 
     private String roleDesc;
 
     private Boolean available;
 
+    private Date createTime;
+
+    private Long createBy;
+
     private Date updateTime;
 
     private Long updateBy;
 
-    private Long createBy;
+    private String appName;
 
-    private Date createTime;
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public String getRoleDesc() {
@@ -51,6 +53,22 @@ public class Role {
         this.available = available;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Long createBy) {
+        this.createBy = createBy;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -67,19 +85,11 @@ public class Role {
         this.updateBy = updateBy;
     }
 
-    public Long getCreateBy() {
-        return createBy;
+    public String getAppName() {
+        return appName;
     }
 
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setAppName(String appName) {
+        this.appName = appName == null ? null : appName.trim();
     }
 }

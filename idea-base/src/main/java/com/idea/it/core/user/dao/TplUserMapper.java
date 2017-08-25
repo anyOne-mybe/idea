@@ -10,7 +10,7 @@ public interface TplUserMapper {
 
     int deleteByExample(TplUserExample example);
 
-    int deleteByPrimaryKey(Long userId);
+    int deleteByPrimaryKey(Long id);
 
     int insert(TplUser record);
 
@@ -18,7 +18,7 @@ public interface TplUserMapper {
 
     List<TplUser> selectByExample(TplUserExample example);
 
-    TplUser selectByPrimaryKey(Long userId);
+    TplUser selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") TplUser record, @Param("example") TplUserExample example);
 
