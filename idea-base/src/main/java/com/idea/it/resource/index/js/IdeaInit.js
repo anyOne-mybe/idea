@@ -70,6 +70,8 @@
 	function _bindMenueEvent($menuedDoms){
 		$menuedDoms.on('click','.nav_name',function(e){
 			var $this = $(this);
+			$menuedDoms.find('.nav_name').removeClass('active');
+			$this.addClass('active');
 			var url = $this.attr('data_hash');
 			if(url){
 				Idea.Page.forward(url);

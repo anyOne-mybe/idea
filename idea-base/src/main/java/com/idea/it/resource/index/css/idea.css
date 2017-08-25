@@ -43,6 +43,14 @@ ul, li {
 	border-bottom: 2px solid #ff3c00;
 }
 
+.nav_item.active>.nav_name {
+	color: #ff3c00;
+}
+
+.nav_name.active {
+	color: #ff3c00;
+}
+
 .nav_item>.nav_name {
 	cursor: pointer;
 }
@@ -125,4 +133,20 @@ ul, li {
 	#idea_mainContent {
 		height: 865px;
 	}
+}
+
+.idea-loading {
+	position: absolute;
+	top: 65px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.idea-loading {
+	background: url(../images/loading.gif) no-repeat center;
+}
+
+.hidden {
+	display: none;
 }

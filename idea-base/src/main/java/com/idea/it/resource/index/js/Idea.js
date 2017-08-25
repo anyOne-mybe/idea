@@ -364,17 +364,17 @@
 	};
 	
 	Idea.UI.loading = function(){
-		var $loading = $(document.body).find('#app-loading');
+		var $loading = $(document.body).find('#Idea-loading');
 		if($loading.length === 0){
-			$loading = $('<div id="app-loading" class="app-loading"></div>').appendTo($(document.body));
+			$loading = $('<div id="Idea-loading" class="idea-loading"></div>').appendTo($(document.body));
 		}
-		$loading.removeClass('app-hiden');
+		$loading.removeClass('hidden');
 	};
 	
 	Idea.UI.loadingClose = function(){
 		setTimeout(function(){
-			var $loading = $(document.body).find('#app-loading');
-			$loading.addClass('app-hiden');
+			var $loading = $(document.body).find('#Idea-loading');
+			$loading.addClass('hidden');
 		},150)
 	};
 	
