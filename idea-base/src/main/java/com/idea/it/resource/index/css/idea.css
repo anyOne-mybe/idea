@@ -99,10 +99,30 @@ ul, li {
 }
 
 .idea_logo {
-	padding: 0 15px 0 50px;
-}
-
-.idea_logo>img {
+	margin: 0 15px 0 50px;
 	width: 55px;
 	height: 40px;
+	background: url(../images/logo.png);
+	background-size: 55px 40px;
+	background-repeat: no-repeat;
+}
+
+.nav_crumbs {
+	height: 20px;
+}
+
+.idea_foot {
+	text-align: center;
+	height: 40px;
+}
+
+.idea_foot>span {
+	height: 40px;
+	line-height: 40px;
+}
+
+@media screen and (max-height:1000px) {
+	#idea_mainContent {
+		height: 865px;
+	}
 }

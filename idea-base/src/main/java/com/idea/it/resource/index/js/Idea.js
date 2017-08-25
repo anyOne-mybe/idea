@@ -26,8 +26,6 @@
 		if($.trim(uri)){
 			Idea.UI.loading();
 			
-			_updateMenueActive(uri);
-			
 			//清空当前模块
 			_cleanUnUseModels();
 			var oldChange = window['onhashchange'];
@@ -35,6 +33,8 @@
 			
 			window.location.hash = '#!' + uri;
 			$('#idea_mainContent').load(uri,function(){
+				_updateMenueActive(uri);
+				
 				window['onhashchange'] = oldChange;
 				Idea.UI.loadingClose();
 				//执行各模块的初始化方法
@@ -436,7 +436,6 @@
 	};
 	
 	function _updateMenueActive(url){
-		debugger;
 		setTimeout(function(){
 			var $menues = $('#idea_nav').find('.nav_item');
 			var $item = null,
@@ -446,6 +445,8 @@
 				nodeData = $item.data('value');
 				if(isInNode(nodeData,url)){
 					$item.addClass('active').siblings().removeClass('active');
+					
+					_updateNavActive(nodeData,url);
 					return;
 				}
 			}
@@ -465,6 +466,55 @@
 		}
 		
 		return false;
+	};
+	
+	function _updateNavActive(nodeData,url){
+		debugger;
+		document.title = nodeData.name;
+		
+		var nvaDom = [],
+			children = nodeData.children || [],
+			node = null,
+			hasFind = false,
+			subChildren = null,
+			subNode = null;
+		for(var i = 0; i < children.length; i++){
+			node = children[i];
+			if(node.url === url){
+				hasFind = true;
+				//二级菜单
+				nvaDom.push('<span class="level1">首页</span>');
+				nvaDom.push('<span class="sepleter">></span>');
+				nvaDom.push('<span class="level2">'+node.name+'</span>');
+				
+				document.title = node.name;
+				break;
+			}
+			
+			if(hasFind){
+				$("#idea_crumbs").html(nvaDom.join(''));
+				return;
+			}else{
+				subChildren = node.children || [];
+				for(var j = 0; j < subChildren.length; j++){
+					subNode = subChildren[i];
+					if(subNode.url === url){
+						hasFind = true;
+						//二级菜单
+						nvaDom.push('<span class="level1">首页</span>');
+						nvaDom.push('<span class="sepleter">></span>');
+						nvaDom.push('<span class="level2">'+node.name+'</span>');
+						nvaDom.push('<span class="sepleter">></span>');
+						nvaDom.push('<span class="level3">'+subNode.name+'</span>');
+						document.title = subNode.name;
+						break;
+					}
+				}
+			}
+			
+			$("#idea_crumbs").html(nvaDom.join(''));
+		}
+		
 	};
 	
 	/****   工具 *******/

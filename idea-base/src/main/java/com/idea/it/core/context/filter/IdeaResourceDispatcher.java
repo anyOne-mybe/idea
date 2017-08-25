@@ -2,14 +2,22 @@
 package com.idea.it.core.context.filter;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import com.idea.it.core.context.IIdeaServletHandler;
 import com.idea.it.core.context.IdeaContext;
@@ -18,16 +26,32 @@ import com.idea.it.core.context.manager.IdeaContextManager;
 import com.idea.it.core.environment.IEnvironmentOperatable;
 import com.idea.it.core.menue.IMenueOperatable;
 import com.idea.it.core.permission.IPermissionOperateable;
+import com.idea.it.resource.IdeaResources;
 import com.idea.it.web.upload.IdeaFileUpload;
 
 /**
- * 类说明
- * 
- * @author ****
- * @date 2017年8月8日 新建
+ * @ClassName: IdeaResourceDispatcher
+ * @Description: jar资源处理
+ * @author guanhaobi
+ * @date 2017年8月25日 下午8:05:28
  */
 public class IdeaResourceDispatcher implements Filter
 {
+
+    private static final String IDEA_RESOURCE_PATH = "ideaResource";
+    private static final Map<String, String> MINE_TYPE_MAP;
+    private static final String DEFAULT_MINE_TYPE = "application/octet-stream";
+    static
+    {
+        MINE_TYPE_MAP = new HashMap<String, String>();
+        MINE_TYPE_MAP.put( "js", "application/javascript;charset=utf-8" );
+        MINE_TYPE_MAP.put( "css", "text/css;charset=utf-8" );
+        MINE_TYPE_MAP.put( "gif", "image/gif" );
+        MINE_TYPE_MAP.put( "jpg", "image/jpeg" );
+        MINE_TYPE_MAP.put( "jpeg", "image/jpeg" );
+        MINE_TYPE_MAP.put( "png", "image/png" );
+        MINE_TYPE_MAP.put( "html", "text/html" );
+    }
 
     @Override
     public void init( FilterConfig filterConfig ) throws ServletException
@@ -45,13 +69,78 @@ public class IdeaResourceDispatcher implements Filter
 
         handleThreadLocal( request, response );
 
-        dispatchRequest( request, response, chain );
+        String resourcePath = request.getRequestURI()
+                .substring( request.getContextPath().length() );
+        if ( resourcePath.equals( "/" ) )
+        {
+            resourcePath = "/ideaResource/index/html/index.html";
+        }
+        // 获取jar中的静态资源
+        if ( resourcePath.startsWith( "/" + IDEA_RESOURCE_PATH + "/" ) )
+        {
+            dispatchIdeaStaticRequest( request, response, resourcePath );
+        } else
+        {
+            dispatchRequest( request, response, chain );
+        }
+    }
+
+    private void dispatchIdeaStaticRequest( HttpServletRequest request,
+            HttpServletResponse response, String resourcePath )
+            throws IOException
+    {
+        InputStream inputStream = getIdeaResource( request, response,
+                resourcePath );
+
+        String ext = FilenameUtils.getExtension( resourcePath ).toLowerCase();
+        String contentType = MINE_TYPE_MAP.get( ext );
+        if ( contentType == null )
+        {
+            contentType = DEFAULT_MINE_TYPE;
+        }
+        response.setContentType( contentType );
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        try
+        {
+            int size = IOUtils.copy( inputStream, outputStream ); // 向输出流输出内容
+            response.setContentLength( size );
+        } finally
+        {
+            IOUtils.closeQuietly( inputStream );
+            IOUtils.closeQuietly( outputStream );
+        }
     }
 
     @Override
     public void destroy()
     {
         // TODO Auto-generated method stub
+    }
+
+    private InputStream getIdeaResource( HttpServletRequest request,
+            HttpServletResponse response, String resourcePath )
+            throws IOException
+    {
+
+        InputStream inputstream = null;
+        resourcePath = resourcePath
+                .substring( IDEA_RESOURCE_PATH.length() + 2 );
+        URL resource = IdeaResources.class.getResource( resourcePath );
+        if ( resource == null )
+        {
+            response.sendError( HttpServletResponse.SC_NOT_FOUND );
+            return inputstream;
+        }
+
+        inputstream = resource.openStream();
+        if ( null == inputstream )
+        {
+            response.sendError( HttpServletResponse.SC_NOT_FOUND );
+            return inputstream;
+        }
+
+        return inputstream;
     }
 
     private void dispatchRequest( HttpServletRequest request,

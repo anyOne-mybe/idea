@@ -1,14 +1,16 @@
 ;$(function(){
-	//初始化Idea上下文
+	// 初始化Idea上下文
 	initIdeaContext();
 	
 	function initIdeaContext(){
 		var hash = (location.hash || '').slice(2);
 		if(hash){
 			Idea.Page.forward(hash);
+		}else{
+			Idea.Page.forward('home.html');
 		}
 		
-		//1.获取基础信息，用户、权限、菜单
+		// 1.获取基础信息，用户、权限、菜单
 		_initWorkspaceVO();
 	};
 	
@@ -29,7 +31,7 @@
 	};
 	
 	function _initLogo(){
-		$('#idea_nav').append('<div class="idea_logo"><img src="idea/images/logo.png"/></div>');
+		$('#idea_nav').append('<div class="idea_logo"></div>');
 	};
 	
 	function _initMenues(menueNodes){
@@ -77,7 +79,7 @@
 		$menuedDoms.on('mouseenter','.nav_item',function(e){
 			var $this = $(this);
 			var data = $this.data('value');
-			//展示子菜单
+			// 展示子菜单
 			_showSunMenues($this,data);
 		});
 	};
