@@ -161,15 +161,22 @@ public class PermissionScanner implements IPermissionOperateable
                     resource.getResourceCode(), ServiceType.SERVICE,
                     resource.getOperateCode(), resource.getAppName() );
             resource.setAvailable( true );
-            resource.setUpdateDate( currentTime );
-            resource.setUpdateBy( user.getId() );
 
             if ( null != dbResourcesVO )
             {
-                resource.setId( dbResourcesVO.getId() );
-                resourceData.updateResource( resource );
+                dbResourcesVO.setUpdateDate( currentTime );
+                dbResourcesVO.setUpdateBy( user.getId() );
+                dbResourcesVO.setResourceCode( resource.getResourceCode() );
+                dbResourcesVO.setResourceName( resource.getResourceName() );
+                dbResourcesVO.setOperateCode( resource.getOperateCode() );
+                dbResourcesVO.setOperateName( resource.getOperateName() );
+                dbResourcesVO.setAvailable( true );
+
+                resourceData.updateResource( dbResourcesVO );
             } else
             {
+                resource.setCreateBy( user.getId() );
+                resource.setCreateDate( currentTime );
                 resourceData.insert( resource );
             }
         }

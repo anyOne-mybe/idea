@@ -28,6 +28,7 @@ public class MenueDataImpl implements IMenueData
         MenueExample example = new MenueExample();
         Criteria criteria = example.createCriteria();
         criteria.andAppNameEqualTo( appName );
+        example.setOrderByClause( "sort asc" );
 
         return menueMapper.selectByExample( example );
     }
