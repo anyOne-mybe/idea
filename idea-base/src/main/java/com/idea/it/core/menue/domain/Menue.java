@@ -11,15 +11,17 @@ public class Menue {
 
     private String url;
 
-    private String appName;
+    private Integer sort;
 
     private Long createBy;
 
+    private Date createDate;
+
     private Long updateBy;
 
-    private Date crateDate;
-
     private Date updateDate;
+
+    private String appName;
 
     public Long getId() {
         return id;
@@ -53,12 +55,12 @@ public class Menue {
         this.url = url == null ? null : url.trim();
     }
 
-    public String getAppName() {
-        return appName;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName == null ? null : appName.trim();
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Long getCreateBy() {
@@ -69,6 +71,14 @@ public class Menue {
         this.createBy = createBy;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public Long getUpdateBy() {
         return updateBy;
     }
@@ -77,19 +87,19 @@ public class Menue {
         this.updateBy = updateBy;
     }
 
-    public Date getCrateDate() {
-        return crateDate;
-    }
-
-    public void setCrateDate(Date crateDate) {
-        this.crateDate = crateDate;
-    }
-
     public Date getUpdateDate() {
         return updateDate;
     }
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName == null ? null : appName.trim();
     }
 }

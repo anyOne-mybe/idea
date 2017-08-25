@@ -1,10 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/8/25 15:24:11                           */
+/* Created on:     2017/8/25 16:05:33                           */
 /*==============================================================*/
 
 
 DROP TABLE IF EXISTS IDAE_TPL_ROLE;
+
+DROP TABLE IF EXISTS IDEA_TPL_MENUE;
 
 DROP TABLE IF EXISTS IDEA_TPL_RESOURCES;
 
@@ -17,7 +19,7 @@ DROP TABLE IF EXISTS IDEA_USER_ROLE;
 /*==============================================================*/
 CREATE TABLE IDAE_TPL_ROLE
 (
-   ID                   INT(10) NOT NULL,
+   ID                   INT(10) NOT NULL AUTO_INCREMENT,
    NAME                 VARCHAR(50),
    ROLE_DESC            VARCHAR(150),
    AVAILABLE            CHAR,
@@ -32,11 +34,31 @@ CREATE TABLE IDAE_TPL_ROLE
 ALTER TABLE IDAE_TPL_ROLE COMMENT '角色表';
 
 /*==============================================================*/
+/* Table: IDEA_TPL_MENUE                                        */
+/*==============================================================*/
+CREATE TABLE IDEA_TPL_MENUE
+(
+   ID                   INT(10) NOT NULL AUTO_INCREMENT,
+   NAME                 VARCHAR(100),
+   PARENT_ID            INT(10),
+   URL                  VARCHAR(200),
+   SORT                 INT(3),
+   CREATE_BY            INT(10),
+   CREATE_DATE          DATETIME,
+   UPDATE_BY            INT(10),
+   UPDATE_DATE          DATETIME,
+   APP_NAME             VARCHAR(100),
+   PRIMARY KEY (ID)
+);
+
+ALTER TABLE IDEA_TPL_MENUE COMMENT '菜单表';
+
+/*==============================================================*/
 /* Table: IDEA_TPL_RESOURCES                                    */
 /*==============================================================*/
 CREATE TABLE IDEA_TPL_RESOURCES
 (
-   ID                   INT(10) NOT NULL,
+   ID                   INT(10) NOT NULL AUTO_INCREMENT,
    RESOURCE_CODE        VARCHAR(100),
    RESOURCE_NAME        VARCHAR(100),
    TYPE                 VARCHAR(50),
@@ -58,7 +80,7 @@ ALTER TABLE IDEA_TPL_RESOURCES COMMENT '资源定义表';
 /*==============================================================*/
 CREATE TABLE IDEA_TPL_USER
 (
-   ID                   INT(10) NOT NULL,
+   ID                   INT(10) NOT NULL AUTO_INCREMENT,
    NAME                 VARCHAR(100),
    ACCOUNT              VARCHAR(100),
    PASSWORD             VARCHAR(50),
@@ -85,7 +107,7 @@ ALTER TABLE IDEA_TPL_USER COMMENT '用户表';
 /*==============================================================*/
 CREATE TABLE IDEA_USER_ROLE
 (
-   ID                   INT(10) NOT NULL,
+   ID                   INT(10) NOT NULL AUTO_INCREMENT,
    USER_ID              INT(10),
    ROLE_ID              INT(10),
    CREATE_TIME          DATETIME,
