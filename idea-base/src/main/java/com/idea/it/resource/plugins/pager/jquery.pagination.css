@@ -1,0 +1,68 @@
+.ui-pagination-container {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.ui-pagination-container .ui-pagination-page-item {
+	font-size: 14px;
+	padding: 0px 10px;
+	background: #fff;
+	border: 1px solid #666;
+	color: #666;
+	margin: 0 3px;
+	text-decoration: none;
+	height: 28px;
+	line-height: 28px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.ui-pagination-container .ui-pagination-page-item:hover {
+	border-color: #568dbd;
+	color: #568dbd;
+	text-decoration: none;
+}
+
+.ui-pagination-container .ui-pagination-page-item.active {
+	background: #568dbd;
+	border-color: #568dbd;
+	color: #fff;
+	cursor: default;
+}
+
+.pager_widget {
+	float: right;
+}
+
+.pager_widget>div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.page_go {
+	display: inline-block;
+	vertical-align: top;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #aaa;
+	width: 30px;
+	text-align: center;
+	cursor: pointer;
+	margin-right: 15px;
+}
+
+.page_in {
+	height: 28px;
+	width: 45px;
+	border: 1px solid #aaa;
+	margin-left: 15px;
+	text-indent: 8px;
+}
+
+.page_select select {
+	height: 30px;
+	line-height: 30px;
+	text-indent: 5px;
+	width: 55px;
+	outline: none;
+}

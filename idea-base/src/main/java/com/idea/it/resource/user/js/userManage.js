@@ -21,6 +21,8 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 		_initUserBody($page);
 		
 		_bindUserBodyEvent($page);
+		
+		_initUserFoot($page);
 	};
 
 	function _initUserHeader($page){
@@ -75,22 +77,6 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 	};
 	
 	function _initUserBody($page){
-//		var bodyDom = [];
-//		bodyDom.push('<div class="grid_title">');
-//			bodyDom.push('<div><span>用户名</span></div>');
-//			bodyDom.push('<div><span>姓名</span></div>');
-//			bodyDom.push('<div><span>部门</span></div>');
-//			bodyDom.push('<div><span>角色</span></div>');
-//			bodyDom.push('<div><span>注册时间</span></div>');
-//			bodyDom.push('<div><span>注销时间</span></div>');
-//			bodyDom.push('<div><span>是否有效</span></div>');
-//			bodyDom.push('<div><span>操作</span></div>');
-//		bodyDom.push('</div>');
-		
-		
-		
-//		$page.find('.body').html(bodyDom.join(''));
-		
 		var gridOption = {
 				columns: [
 	                { display: '主键', name: 'id', width: 50,type:'int' },
@@ -138,15 +124,13 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 	            		],
 	            	Total :400
 	            },
-	            usePager : true,
+	            usePager : false,
 	            enabledEdit :true,
 	            onSelectRow: function (rowdata, rowindex){
+	            	debugger;
 	                   $("#txtrowindex").val(rowindex);
 	            },
-	            rownumbers:true,
-	            page:3,
-	            pageSize:5,
-	            pageSizeOptions :[5,10,25,50,100]
+//	            rownumbers:true
 		};
 		
 		var gridManager = $("#demo").ligerGrid(gridOption);
@@ -160,6 +144,29 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 			debugger;
 			page.config.gridManager.beginEdit(0);
 		})
+	};
+	
+	function _initUserFoot($page){
+		var pagerOption = {
+			target : $('#footU'),
+			 currentPage: 4,// 当前页数
+			 totalPage: 16,// 总页数
+			 isShow: false,// 是否显示首尾页
+			 count: 5,// 显示个数
+			 homePageText: "首页",// 首页文本
+			 endPageText: "尾页",// 尾页文本
+			 prevPageText: "上一页",// 上一页文本
+			 nextPageText: "下一页",// 下一页文本
+			 optionValues:[5,10,20,50,100],
+			 optionValue : 5,
+			 callback: function(current,pageSize) {
+			       // 回调,current(当前页数)
+				 console.log("分页 " + current + ' size ' + pageSize)
+			 }
+		};
+		
+		var pager = new $.fn.Pager();
+		pager.initPager(pagerOption);
 	};
 	
 	function _exit(){

@@ -129,7 +129,7 @@ ul, li {
 	line-height: 40px;
 }
 
-@media screen and (min-height:1000px) {
+@media screen and (min-height:950px) {
 	#idea_mainContent {
 		height: 865px;
 	}

@@ -102,9 +102,12 @@
 	vertical-align: top;
 }
 
-.row_operate{
-	
+.row_operate {
 	text-decoration: underline;
-    color: #1919bb;
-    margin-right: 3px;
+	color: #1919bb;
+	margin-right: 3px;
+}
+
+.user_container .foot {
+	padding: 20px 0;
 }
