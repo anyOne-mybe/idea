@@ -1,0 +1,110 @@
+.user_container {
+	width: 1200px;
+	margin: 0 auto;
+	border: 1px solid red;
+	padding: 20px 20px 20px 20px;
+}
+
+.row_item {
+	padding-bottom: 10px;
+}
+
+.row_item>span {
+	height: 30px;
+	display: inline-block;
+	vertical-align: top;
+	line-height: 30px;
+	padding-right: 8px;
+	color: #666;
+}
+
+.row_item>input {
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #aaa;
+	padding: 0 0 0 5px;
+	margin-right: 15px;
+	color: #666;
+}
+
+.user_name {
+	margin-right: 14px;
+}
+
+.user_dep {
+	margin-left: 28px;
+}
+
+.btn_box {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.btn {
+	display: inline-block;
+	vertical-align: top;
+	height: 28px;
+	padding: 0px 15px;
+	text-align: center;
+	line-height: 28px;
+	cursor: pointer;
+	color: #666;
+	border: 1px solid #666;
+}
+
+.btn:hover {
+	color: #ff3c00;
+	border: 1px solid #ff3c00;
+}
+
+.btn.search {
+	margin-right: 8px;
+	margin-left: 15px;
+}
+
+.btn.switch {
+	margin-left: 8px;
+	padding: 0 10px;
+	font-size: 20px;
+	border: none;
+}
+
+.user_sex_box, .user_sex_box>div, .radio_icon {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.user_sex_box>div {
+	margin-right: 10px;
+}
+
+.radio_text {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+}
+
+.radio_icon {
+	width: 18px;
+	height: 14px;
+	font-size: 18px;
+	padding-top: 6px;
+	color: #666;
+	cursor: pointer;
+}
+
+.active>.radio_icon {
+	color: #ff3c00;
+}
+
+.grid_title>div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.row_operate{
+	
+	text-decoration: underline;
+    color: #1919bb;
+    margin-right: 3px;
+}

@@ -38,9 +38,16 @@ import com.idea.it.web.upload.IdeaFileUpload;
 public class IdeaResourceDispatcher implements Filter
 {
 
-    private static final String IDEA_RESOURCE_PATH = "ideaResource";
+    /**
+     * 文件头
+     */
     private static final Map<String, String> MINE_TYPE_MAP;
+
+    /**
+     * 默认文件头
+     */
     private static final String DEFAULT_MINE_TYPE = "application/octet-stream";
+
     static
     {
         MINE_TYPE_MAP = new HashMap<String, String>();
@@ -50,7 +57,7 @@ public class IdeaResourceDispatcher implements Filter
         MINE_TYPE_MAP.put( "jpg", "image/jpeg" );
         MINE_TYPE_MAP.put( "jpeg", "image/jpeg" );
         MINE_TYPE_MAP.put( "png", "image/png" );
-        MINE_TYPE_MAP.put( "html", "text/html" );
+        MINE_TYPE_MAP.put( "html", "text/html;charset=utf-8" );
     }
 
     @Override
@@ -71,12 +78,15 @@ public class IdeaResourceDispatcher implements Filter
 
         String resourcePath = request.getRequestURI()
                 .substring( request.getContextPath().length() );
+        // 默认跳转到框架首页
         if ( resourcePath.equals( "/" ) )
         {
-            resourcePath = "/ideaResource/index/html/index.html";
+            resourcePath = "/" + IdeaResources.IDEA_RESOURCE_PATH
+                    + "/index/html/index.html";
         }
         // 获取jar中的静态资源
-        if ( resourcePath.startsWith( "/" + IDEA_RESOURCE_PATH + "/" ) )
+        if ( resourcePath
+                .startsWith( "/" + IdeaResources.IDEA_RESOURCE_PATH + "/" ) )
         {
             dispatchIdeaStaticRequest( request, response, resourcePath );
         } else
@@ -125,7 +135,7 @@ public class IdeaResourceDispatcher implements Filter
 
         InputStream inputstream = null;
         resourcePath = resourcePath
-                .substring( IDEA_RESOURCE_PATH.length() + 2 );
+                .substring( IdeaResources.IDEA_RESOURCE_PATH.length() + 2 );
         URL resource = IdeaResources.class.getResource( resourcePath );
         if ( resource == null )
         {

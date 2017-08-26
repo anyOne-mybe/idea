@@ -7,7 +7,10 @@ package com.idea.it.resource;
  * @author ****
  * @date 2017年8月25日 新建
  */
-public class IdeaResources
+public interface IdeaResources
 {
-
+    /**
+     * jar资源文件路径
+     */
+    String IDEA_RESOURCE_PATH = "ideaResource";
 }
