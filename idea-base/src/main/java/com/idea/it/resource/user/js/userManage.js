@@ -94,10 +94,10 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 		var gridOption = {
 				columns: [
 	                { display: '主键', name: 'id', width: 50,type:'int' },
-	                { display: '用户名', name: 'name', width: 150 },
-	                { display: '账号', name: 'account', width: 150 },
-	                { display: '部门', name: 'depart', width: 250 },
-	                { display: '角色', name: 'role', width: 250 },
+	                { display: '用户名', name: 'name', width: 150 ,editor: { type: 'text' }},
+	                { display: '账号', name: 'account', width: 150 ,editor: { type: 'text' }},
+	                { display: '部门', name: 'depart', width: 250,editor: { type: 'text' } },
+	                { display: '角色', name: 'role', width: 250,editor: { type: 'text' } },
 	                { display: '操作', isSort: false, width: 120, render: function (rowdata, rowindex, value)
 	                    {
 	                        var h = "";
@@ -122,7 +122,19 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 	            		{id:1,name:'张三',account:'test001',depart:'行政部门',role:'系统管理员'},
 	            		{id:2,name:'李四',account:'test002',depart:'行政部门',role:'普通用户'},
 	            		{id:3,name:'王二',account:'test003',depart:'行政部门',role:'普通用户'},
-	            		{id:4,name:'麻子',account:'test004',depart:'行政部门',role:'普通用户'}
+	            		{id:4,name:'麻子',account:'test004',depart:'行政部门',role:'普通用户'},
+	            		{id:5,name:'张三',account:'test001',depart:'行政部门',role:'系统管理员'},
+	            		{id:6,name:'李四',account:'test002',depart:'行政部门',role:'普通用户'},
+	            		{id:7,name:'王二',account:'test003',depart:'行政部门',role:'普通用户'},
+	            		{id:8,name:'麻子',account:'test004',depart:'行政部门',role:'普通用户'},
+	            		{id:9,name:'张三',account:'test001',depart:'行政部门',role:'系统管理员'},
+	            		{id:10,name:'李四',account:'test002',depart:'行政部门',role:'普通用户'},
+	            		{id:11,name:'王二',account:'test003',depart:'行政部门',role:'普通用户'},
+	            		{id:12,name:'麻子',account:'test004',depart:'行政部门',role:'普通用户'},
+	            		{id:13,name:'张三',account:'test001',depart:'行政部门',role:'系统管理员'},
+	            		{id:14,name:'李四',account:'test002',depart:'行政部门',role:'普通用户'},
+	            		{id:15,name:'王二',account:'test003',depart:'行政部门',role:'普通用户'},
+	            		{id:16,name:'麻子',account:'test004',depart:'行政部门',role:'普通用户'}
 	            		],
 	            	Total :400
 	            },
@@ -130,11 +142,15 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 	            enabledEdit :true,
 	            onSelectRow: function (rowdata, rowindex){
 	                   $("#txtrowindex").val(rowindex);
-	            }
-	            
+	            },
+	            rownumbers:true,
+	            page:3,
+	            pageSize:5,
+	            pageSizeOptions :[5,10,25,50,100]
 		};
 		
-		var gridManager = $("#demo").ligerGrid(gridOption)
+		var gridManager = $("#demo").ligerGrid(gridOption);
+		gridManager = $("#demo").ligerGrid(gridOption)
 		page.config.gridManager = gridManager;
 	};
 	
@@ -142,7 +158,7 @@ Idea.Model.define('Idea.systemManage.user',function(page){
 		$page.on('click','.row_edit',function(){
 			var $this = $(this);
 			debugger;
-			page.config.gridManager.beginEdit($this.attr('data_index'));
+			page.config.gridManager.beginEdit(0);
 		})
 	};
 	
