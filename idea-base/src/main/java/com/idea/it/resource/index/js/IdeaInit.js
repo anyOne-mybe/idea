@@ -3,13 +3,6 @@
 	initIdeaContext();
 	
 	function initIdeaContext(){
-		var hash = (location.hash || '').slice(2);
-		if(hash){
-			Idea.Page.forward(hash);
-		}else{
-			Idea.Page.forward('home.html');
-		}
-		
 		// 1.获取基础信息，用户、权限、菜单
 		_initWorkspaceVO();
 	};
@@ -19,9 +12,22 @@
 			url  : "idea/buildEnvironment",
 			type : 'GET',
 			success : function(response){
+				window['workspaceVO'] = response;
+				
+				_forward();
+				
 				_initIdeaEnvironment(response);
 			}
 		});
+	};
+	
+	function _forward(){
+		var hash = (location.hash || '').slice(2);
+		if(hash){
+			Idea.Page.forward(hash);
+		}else{
+			Idea.Page.forward('home.html');
+		}
 	};
 	
 	function _initIdeaEnvironment(response){

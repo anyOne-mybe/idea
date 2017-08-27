@@ -23,6 +23,8 @@ public class MenueVO
 
     private String url;
 
+    private int sort;
+
     private List<MenueVO> children;
 
     public MenueVO()
@@ -36,6 +38,7 @@ public class MenueVO
         this.name = menue.getName();
         this.parentId = menue.getParentId();
         this.url = menue.getUrl();
+        this.sort = menue.getSort();
         this.children = new ArrayList<MenueVO>();
     }
 
@@ -87,6 +90,16 @@ public class MenueVO
     public void setChildren( List<MenueVO> children )
     {
         this.children = children;
+    }
+
+    public int getSort()
+    {
+        return sort;
+    }
+
+    public void setSort( int sort )
+    {
+        this.sort = sort;
     }
 
 }
