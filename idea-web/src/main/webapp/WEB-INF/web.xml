@@ -13,10 +13,6 @@
     <param-name>appName</param-name>
     <param-value>idea</param-value>
   </context-param>
-  <context-param>
-    <param-name>appName</param-name>
-    <param-value>idea</param-value>
-  </context-param>
   
    <filter>
     <filter-name>ssoFilter</filter-name>
