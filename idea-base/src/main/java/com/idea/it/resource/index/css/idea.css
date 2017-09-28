@@ -113,6 +113,7 @@ ul, li {
 	background: url(../images/logo.png);
 	background-size: 55px 40px;
 	background-repeat: no-repeat;
+	cursor: pointer;
 }
 
 .nav_crumbs {

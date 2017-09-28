@@ -23,7 +23,7 @@
     Idea.Page = {};
     Idea.Page.forward = _forward;
 
-    function _forward(uri) {
+    function _forward(uri,displayHash) {
         if ($.trim(uri)) {
             Idea.UI.loading();
 
@@ -32,7 +32,11 @@
             var oldChange = window['onhashchange'];
             window['onhashchange'] = null;
 
-            window.location.hash = '#!' + uri;
+            if(!displayHash){
+            	window.location.hash = '#!' + uri;
+            }
+            
+            
             $('#idea_mainContent').load(uri, function() {
                 _updateMenueActive(uri);
 
@@ -44,8 +48,8 @@
         }
     };
 
-    Idea.Page.goHome = function() {
-        Idea.Page.forward('home/page/home.html');
+    Idea.Page.goHome = function(uri) {
+        Idea.Page.forward(uri,true);
     };
 
     function _executeModelsReady() {
