@@ -26,7 +26,7 @@
 		if(hash){
 			Idea.Page.forward(hash);
 		}else{
-			Idea.Page.forward('home.html');
+			Idea.Page.goHome('home.html');
 		}
 	};
 	
@@ -38,6 +38,10 @@
 	
 	function _initLogo(){
 		$('#idea_nav').append('<div class="idea_logo"></div>');
+		
+		$('body').on('click','.idea_logo',function(){
+			Idea.Page.forward('home.html');
+		});
 	};
 	
 	function _initMenues(menueNodes){

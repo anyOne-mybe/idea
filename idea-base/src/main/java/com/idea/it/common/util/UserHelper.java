@@ -23,10 +23,7 @@ public class UserHelper
                     .getAttribute( UserToken.USER_SESSION_TOKEN );
         }
 
-        TplUser user = new TplUser();
-        user.setId( 123456789L );
-
-        return user;
+        return null;
     }
 
 }
