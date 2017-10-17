@@ -1,0 +1,159 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+html, body, div, ul, span, p {
+	font-family: 微软雅黑;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.idra_hide {
+	display: none;
+}
+
+.idea_header {
+	border-bottom: 1px solid #b1a5a5;
+	box-shadow: 0px -10px 29px #000;
+}
+
+.idea_header>div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.nva_container>.nav_item {
+	display: inline-block;
+	vertical-align: top;
+	height: 42px;
+	line-height: 42px;
+	padding: 0 15px;
+	font-size: 15px;
+	position: relative;
+}
+
+.nav_item.active {
+	border-bottom: 2px solid #ff3c00;
+}
+
+.nav_item.active>.nav_name {
+	color: #ff3c00;
+}
+
+.nav_name.active {
+	color: #ff3c00;
+}
+
+.nav_item>.nav_name {
+	cursor: pointer;
+}
+
+.nav_item:hover .sub_menue_container {
+	display: block;
+}
+
+.sub_menue_container {
+	position: absolute;
+	border: solid 1px #ebebeb;
+	box-shadow: 4px 7px 16px rgba(0, 0, 0, .32);
+	width: 100px;
+	border: solid 1px #ebebeb;
+	box-shadow: 4px 7px 16px rgba(0, 0, 0, .32);
+	margin-top: -2px;
+	background: white;
+	display: none;
+	cursor: default;
+}
+
+.sub_menue_container:after {
+	content: '';
+	position: absolute;
+	border: 8px solid transparent;
+	border-bottom: 8px solid white;
+	top: -14px;
+	left: 50%;
+	margin-left: -8px;
+}
+
+.sub_menue_container:before {
+	content: '';
+	position: absolute;
+	border: 8px solid transparent;
+	border-bottom: 8px solid #ebebeb;
+	top: -16px;
+	left: 50%;
+	margin-left: -8px;
+}
+
+.sub_item {
+	height: 20px;
+	line-height: 20px;
+	cursor: pointer;
+	padding: 0 10px;
+	margin: 5px 0;
+	text-align: center;
+}
+
+.sub_item:hover .nav_name, .nav_item:hover>.nav_name {
+	color: #ff3c00;
+	text-decoration: underline;
+}
+
+.idea_logo {
+	margin: 0 15px 0 50px;
+	width: 55px;
+	height: 40px;
+	background: url(../images/logo.png);
+	background-size: 55px 40px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.nav_crumbs {
+	height: 20px;
+}
+
+.idea_foot {
+	text-align: center;
+	height: 40px;
+}
+
+.idea_foot>span {
+	height: 40px;
+	line-height: 40px;
+}
+
+@media screen and (min-height:950px) {
+	#idea_mainContent {
+		height: 865px;
+	}
+}
+
+@media screen and (min-height: 650px) and (max-height: 770px) {
+	#idea_mainContent {
+		height: 540px;
+	}
+}
+
+.idea-loading {
+	position: absolute;
+	top: 65px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.idea-loading {
+	background: url(../images/loading.gif) no-repeat center;
+}
+
+.hidden {
+	display: none;
+}

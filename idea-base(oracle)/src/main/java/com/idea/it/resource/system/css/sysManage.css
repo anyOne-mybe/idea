@@ -1,0 +1,10 @@
+.manage_box>div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.manage_box>.left {
+	width: 170px;
+	border-right: 1px solid red;
+	height: 300px;
+}
