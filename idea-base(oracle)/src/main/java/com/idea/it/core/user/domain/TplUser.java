@@ -5,6 +5,8 @@ import java.util.Date;
 public class TplUser {
     private Long id;
 
+    private String employeeNumber;
+
     private String name;
 
     private String account;
@@ -13,29 +15,31 @@ public class TplUser {
 
     private String email;
 
-    private String sex;
+    private String officePhone;
 
-    private Integer age;
-
-    private String webChat;
-
-    private String qq;
-
-    private String identityCard;
+    private Long mobilePhone;
 
     private Date birthday;
 
-    private Integer addressId;
+    private Date entryDate;
+
+    private Date desertDate;
+
+    private Short state;
 
     private Boolean available;
 
-    private Date createDate;
+    private String config;
 
-    private Integer createBy;
+    private String attrInfo;
 
-    private Date updateDate;
+    private Date createTime;
 
-    private Integer updateBy;
+    private Date updateTime;
+
+    private Long createBy;
+
+    private Long updateBy;
 
     public Long getId() {
         return id;
@@ -43,6 +47,14 @@ public class TplUser {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber == null ? null : employeeNumber.trim();
     }
 
     public String getName() {
@@ -77,44 +89,20 @@ public class TplUser {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getSex() {
-        return sex;
+    public String getOfficePhone() {
+        return officePhone;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setOfficePhone(String officePhone) {
+        this.officePhone = officePhone == null ? null : officePhone.trim();
     }
 
-    public Integer getAge() {
-        return age;
+    public Long getMobilePhone() {
+        return mobilePhone;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getWebChat() {
-        return webChat;
-    }
-
-    public void setWebChat(String webChat) {
-        this.webChat = webChat == null ? null : webChat.trim();
-    }
-
-    public String getQq() {
-        return qq;
-    }
-
-    public void setQq(String qq) {
-        this.qq = qq == null ? null : qq.trim();
-    }
-
-    public String getIdentityCard() {
-        return identityCard;
-    }
-
-    public void setIdentityCard(String identityCard) {
-        this.identityCard = identityCard == null ? null : identityCard.trim();
+    public void setMobilePhone(Long mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 
     public Date getBirthday() {
@@ -125,12 +113,28 @@ public class TplUser {
         this.birthday = birthday;
     }
 
-    public Integer getAddressId() {
-        return addressId;
+    public Date getEntryDate() {
+        return entryDate;
     }
 
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
+    }
+
+    public Date getDesertDate() {
+        return desertDate;
+    }
+
+    public void setDesertDate(Date desertDate) {
+        this.desertDate = desertDate;
+    }
+
+    public Short getState() {
+        return state;
+    }
+
+    public void setState(Short state) {
+        this.state = state;
     }
 
     public Boolean getAvailable() {
@@ -141,35 +145,51 @@ public class TplUser {
         this.available = available;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getConfig() {
+        return config;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setConfig(String config) {
+        this.config = config == null ? null : config.trim();
     }
 
-    public Integer getCreateBy() {
+    public String getAttrInfo() {
+        return attrInfo;
+    }
+
+    public void setAttrInfo(String attrInfo) {
+        this.attrInfo = attrInfo == null ? null : attrInfo.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Integer createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public Integer getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Integer updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 }

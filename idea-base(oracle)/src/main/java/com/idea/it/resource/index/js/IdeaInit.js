@@ -38,6 +38,7 @@
 	
 	function _initLogo(){
 		$('#idea_nav').append('<div class="idea_logo"></div>');
+		$('#idea_nav').append('<div class="nva_container">多维组织数据平台</div>');
 		
 		$('body').on('click','.idea_logo',function(){
 			Idea.Page.forward('home.html');
@@ -45,17 +46,42 @@
 	};
 	
 	function _initMenues(menueNodes){
+		debugger;
 		var node = null,
-			$menuedDoms = $('<div class="nva_container"></div>');
+			$leftDoms = $('.idea_view_item.left');
+		$leftDoms.append('<div id="menueTree" class="menue_container ztree"></div>');
+		$menuedDoms = $leftDoms.find('.menue_container');
 		
-		for(var i = 0; i < menueNodes.length; i++){
-			node = menueNodes[i];
-			addMenue(node,$menuedDoms);
-		}
+		var setting = _getMenueTreeSetting();
+		var zNodes = menueNodes;
+		$.fn.zTree.init($menuedDoms, setting, zNodes);
+	};
+	
+	function _getMenueTreeSetting(){
+		var setting = {
+			view: {
+				showLine: false,
+				showIcon: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback : {
+				onClick : _clickMenue
+			}
+		};
 		
-		$('#idea_nav').append($menuedDoms);
+		return setting;
+	};
+	
+	function _clickMenue(event, treeId, treeNode){
+		debugger;
+		Idea.Page.forward(treeNode.hash);
 		
-		_bindMenueEvent($menuedDoms);
+		var $currentLi = $('#'+treeNode.tId);
+		$currentLi.addClass('active').siblings().removeClass('active');
 	};
 	
 	function addMenue(node,$menuedDoms){

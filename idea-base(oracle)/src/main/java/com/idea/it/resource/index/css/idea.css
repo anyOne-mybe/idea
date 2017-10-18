@@ -22,6 +22,8 @@ ul, li {
 .idea_header {
 	border-bottom: 1px solid #b1a5a5;
 	box-shadow: 0px -10px 29px #000;
+	padding: 5px 0;
+	background: #7878e8;
 }
 
 .idea_header>div {
@@ -110,7 +112,7 @@ ul, li {
 	margin: 0 15px 0 50px;
 	width: 55px;
 	height: 40px;
-	background: url(../images/logo.png);
+	background: url(../images/hrsj.png);
 	background-size: 55px 40px;
 	background-repeat: no-repeat;
 	cursor: pointer;
@@ -156,4 +158,44 @@ ul, li {
 
 .hidden {
 	display: none;
+}
+
+#idea_view {
+	display: flex;
+	flex-flow: row;
+}
+
+.idea_view_item.left {
+	width: 160px;
+}
+
+.idea_view_item.right {
+	flex: 1;
+}
+
+.nva_container {
+	font-size: 20px;
+	height: 40px;
+	line-height: 40px;
+	color: white;
+}
+
+#menueTree.ztree {
+	border: 1px solid #aaa;
+	border-bottom: none;
+	padding: 0;
+}
+
+#menueTree.ztree * {
+	font-size: 14px;
+}
+
+#menueTree.ztree li {
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #aaa;
+}
+
+#menueTree.ztree li.active {
+	background: #d9e3e4;
 }

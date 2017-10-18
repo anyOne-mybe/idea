@@ -3,14 +3,15 @@ package com.idea.it.core.menue.support;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
+
 import com.google.gson.Gson;
 import com.idea.it.core.menue.IMenueOperatable;
 import com.idea.it.core.menue.data.IMenueData;
@@ -67,7 +68,6 @@ public class MenueOperationImpl implements IMenueOperatable
 
     private List<MenueVO> treeMenues( List<Menue> menues )
     {
-        Map<Long, MenueVO> menueMaps = new HashMap<>( menues.size() );
         MenueVO menueVO = null;
         List<MenueVO> menueVOs = new ArrayList<MenueVO>();
 
@@ -75,35 +75,10 @@ public class MenueOperationImpl implements IMenueOperatable
         {
             menueVO = new MenueVO( menue );
 
-            menueMaps.put( menue.getId(), menueVO );
-            if ( menueVO.getParentId() == null )
-            {
-                menueVOs.add( menueVO );
-            }
-        }
-
-        for ( Map.Entry<Long, MenueVO> entry : menueMaps.entrySet() )
-        {
-            addMenueToParent( entry.getValue(), menueMaps );
+            menueVOs.add( menueVO );
         }
 
         return menueVOs;
-    }
-
-    private void addMenueToParent( MenueVO menueVO,
-            Map<Long, MenueVO> menueMaps )
-    {
-        Long parentId = menueVO.getParentId();
-        MenueVO parentMenueVO = null;
-        if ( null != parentId )
-        {
-            parentMenueVO = menueMaps.get( parentId );
-            if ( null != parentMenueVO )
-            {
-                parentMenueVO.getChildren().add( menueVO );
-            }
-        }
-
     }
 
 }

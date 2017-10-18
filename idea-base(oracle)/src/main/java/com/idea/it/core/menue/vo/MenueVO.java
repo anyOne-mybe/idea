@@ -1,9 +1,6 @@
 
 package com.idea.it.core.menue.vo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.idea.it.core.menue.domain.Menue;
 
 /**
@@ -19,13 +16,11 @@ public class MenueVO
 
     private String name;
 
-    private Long parentId;
+    private Long pId;
 
-    private String url;
+    private String hash;
 
     private int sort;
-
-    private List<MenueVO> children;
 
     public MenueVO()
     {
@@ -36,10 +31,10 @@ public class MenueVO
     {
         this.id = menue.getId();
         this.name = menue.getName();
-        this.parentId = menue.getParentId();
-        this.url = menue.getUrl();
+        this.pId = menue.getParentId();
+        this.hash = menue.getUrl();
         this.sort = menue.getSort();
-        this.children = new ArrayList<MenueVO>();
+        // this.children = new ArrayList<MenueVO>();
     }
 
     public Long getId()
@@ -62,34 +57,24 @@ public class MenueVO
         this.name = name;
     }
 
-    public Long getParentId()
+    public Long getpId()
     {
-        return parentId;
+        return pId;
     }
 
-    public void setParentId( Long parentId )
+    public void setpId( Long pId )
     {
-        this.parentId = parentId;
+        this.pId = pId;
     }
 
-    public String getUrl()
+    public String getHash()
     {
-        return url;
+        return hash;
     }
 
-    public void setUrl( String url )
+    public void setHash( String hash )
     {
-        this.url = url;
-    }
-
-    public List<MenueVO> getChildren()
-    {
-        return children;
-    }
-
-    public void setChildren( List<MenueVO> children )
-    {
-        this.children = children;
+        this.hash = hash;
     }
 
     public int getSort()

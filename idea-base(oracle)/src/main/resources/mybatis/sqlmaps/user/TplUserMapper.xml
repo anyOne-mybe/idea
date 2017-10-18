@@ -2,23 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.idea.it.core.user.dao.TplUserMapper" >
   <resultMap id="BaseResultMap" type="com.idea.it.core.user.domain.TplUser" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="EMPLOYEE_NUMBER" property="employeeNumber" jdbcType="VARCHAR" />
     <result column="NAME" property="name" jdbcType="VARCHAR" />
     <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
     <result column="EMAIL" property="email" jdbcType="VARCHAR" />
-    <result column="SEX" property="sex" jdbcType="CHAR" />
-    <result column="AGE" property="age" jdbcType="INTEGER" />
-    <result column="WEB_CHAT" property="webChat" jdbcType="VARCHAR" />
-    <result column="QQ" property="qq" jdbcType="VARCHAR" />
-    <result column="IDENTITY_CARD" property="identityCard" jdbcType="VARCHAR" />
-    <result column="BIRTHDAY" property="birthday" jdbcType="DATE" />
-    <result column="ADDRESS_ID" property="addressId" jdbcType="INTEGER" />
-    <result column="AVAILABLE" property="available" jdbcType="CHAR" />
-    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="CREATE_BY" property="createBy" jdbcType="INTEGER" />
-    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_BY" property="updateBy" jdbcType="INTEGER" />
+    <result column="OFFICE_PHONE" property="officePhone" jdbcType="VARCHAR" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="DECIMAL" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="ENTRY_DATE" property="entryDate" jdbcType="TIMESTAMP" />
+    <result column="DESERT_DATE" property="desertDate" jdbcType="TIMESTAMP" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="AVAILABLE" property="available" jdbcType="DECIMAL" />
+    <result column="CONFIG" property="config" jdbcType="VARCHAR" />
+    <result column="ATTR_INFO" property="attrInfo" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="DECIMAL" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -79,8 +81,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, NAME, ACCOUNT, PASSWORD, EMAIL, SEX, AGE, WEB_CHAT, QQ, IDENTITY_CARD, BIRTHDAY, 
-    ADDRESS_ID, AVAILABLE, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY
+    ID, EMPLOYEE_NUMBER, NAME, ACCOUNT, PASSWORD, EMAIL, OFFICE_PHONE, MOBILE_PHONE, 
+    BIRTHDAY, ENTRY_DATE, DESERT_DATE, STATE, AVAILABLE, CONFIG, ATTR_INFO, CREATE_TIME, 
+    UPDATE_TIME, CREATE_BY, UPDATE_BY
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.idea.it.core.user.domain.TplUserExample" >
     select
@@ -89,7 +92,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from idea_tpl_user
+    from ORG_USER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,38 +103,43 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from idea_tpl_user
-    where ID = #{id,jdbcType=INTEGER}
+    from ORG_USER
+    where ID = #{id,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from idea_tpl_user
-    where ID = #{id,jdbcType=INTEGER}
+    delete from ORG_USER
+    where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <delete id="deleteByExample" parameterType="com.idea.it.core.user.domain.TplUserExample" >
-    delete from idea_tpl_user
+    delete from ORG_USER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.idea.it.core.user.domain.TplUser" >
-    insert into idea_tpl_user (ID, NAME, ACCOUNT, 
-      PASSWORD, EMAIL, SEX, 
-      AGE, WEB_CHAT, QQ, IDENTITY_CARD, 
-      BIRTHDAY, ADDRESS_ID, AVAILABLE, 
-      CREATE_DATE, CREATE_BY, UPDATE_DATE, 
+    insert into ORG_USER (ID, EMPLOYEE_NUMBER, NAME, 
+      ACCOUNT, PASSWORD, EMAIL, 
+      OFFICE_PHONE, MOBILE_PHONE, BIRTHDAY, 
+      ENTRY_DATE, DESERT_DATE, STATE, 
+      AVAILABLE, CONFIG, ATTR_INFO, 
+      CREATE_TIME, UPDATE_TIME, CREATE_BY, 
       UPDATE_BY)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
-      #{age,jdbcType=INTEGER}, #{webChat,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
-      #{birthday,jdbcType=DATE}, #{addressId,jdbcType=INTEGER}, #{available,jdbcType=CHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=INTEGER})
+    values (#{id,jdbcType=DECIMAL}, #{employeeNumber,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{officePhone,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=DECIMAL}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{entryDate,jdbcType=TIMESTAMP}, #{desertDate,jdbcType=TIMESTAMP}, #{state,jdbcType=DECIMAL}, 
+      #{available,jdbcType=DECIMAL}, #{config,jdbcType=VARCHAR}, #{attrInfo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=DECIMAL}, 
+      #{updateBy,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.idea.it.core.user.domain.TplUser" >
-    insert into idea_tpl_user
+    insert into ORG_USER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
+      </if>
+      <if test="employeeNumber != null" >
+        EMPLOYEE_NUMBER,
       </if>
       <if test="name != null" >
         NAME,
@@ -145,38 +153,41 @@
       <if test="email != null" >
         EMAIL,
       </if>
-      <if test="sex != null" >
-        SEX,
+      <if test="officePhone != null" >
+        OFFICE_PHONE,
       </if>
-      <if test="age != null" >
-        AGE,
-      </if>
-      <if test="webChat != null" >
-        WEB_CHAT,
-      </if>
-      <if test="qq != null" >
-        QQ,
-      </if>
-      <if test="identityCard != null" >
-        IDENTITY_CARD,
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
       </if>
       <if test="birthday != null" >
         BIRTHDAY,
       </if>
-      <if test="addressId != null" >
-        ADDRESS_ID,
+      <if test="entryDate != null" >
+        ENTRY_DATE,
+      </if>
+      <if test="desertDate != null" >
+        DESERT_DATE,
+      </if>
+      <if test="state != null" >
+        STATE,
       </if>
       <if test="available != null" >
         AVAILABLE,
       </if>
-      <if test="createDate != null" >
-        CREATE_DATE,
+      <if test="config != null" >
+        CONFIG,
+      </if>
+      <if test="attrInfo != null" >
+        ATTR_INFO,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
       </if>
       <if test="createBy != null" >
         CREATE_BY,
-      </if>
-      <if test="updateDate != null" >
-        UPDATE_DATE,
       </if>
       <if test="updateBy != null" >
         UPDATE_BY,
@@ -184,7 +195,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="employeeNumber != null" >
+        #{employeeNumber,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -198,55 +212,61 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=CHAR},
+      <if test="officePhone != null" >
+        #{officePhone,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="webChat != null" >
-        #{webChat,jdbcType=VARCHAR},
-      </if>
-      <if test="qq != null" >
-        #{qq,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCard != null" >
-        #{identityCard,jdbcType=VARCHAR},
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=DECIMAL},
       </if>
       <if test="birthday != null" >
-        #{birthday,jdbcType=DATE},
+        #{birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="addressId != null" >
-        #{addressId,jdbcType=INTEGER},
+      <if test="entryDate != null" >
+        #{entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="desertDate != null" >
+        #{desertDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
       </if>
       <if test="available != null" >
-        #{available,jdbcType=CHAR},
+        #{available,jdbcType=DECIMAL},
       </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
+      <if test="config != null" >
+        #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="attrInfo != null" >
+        #{attrInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createBy != null" >
-        #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="updateDate != null" >
-        #{updateDate,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=DECIMAL},
       </if>
       <if test="updateBy != null" >
-        #{updateBy,jdbcType=INTEGER},
+        #{updateBy,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.idea.it.core.user.domain.TplUserExample" resultType="java.lang.Integer" >
-    select count(*) from idea_tpl_user
+    select count(*) from ORG_USER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update idea_tpl_user
+    update ORG_USER
     <set >
       <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.employeeNumber != null" >
+        EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         NAME = #{record.name,jdbcType=VARCHAR},
@@ -260,41 +280,44 @@
       <if test="record.email != null" >
         EMAIL = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null" >
-        SEX = #{record.sex,jdbcType=CHAR},
+      <if test="record.officePhone != null" >
+        OFFICE_PHONE = #{record.officePhone,jdbcType=VARCHAR},
       </if>
-      <if test="record.age != null" >
-        AGE = #{record.age,jdbcType=INTEGER},
-      </if>
-      <if test="record.webChat != null" >
-        WEB_CHAT = #{record.webChat,jdbcType=VARCHAR},
-      </if>
-      <if test="record.qq != null" >
-        QQ = #{record.qq,jdbcType=VARCHAR},
-      </if>
-      <if test="record.identityCard != null" >
-        IDENTITY_CARD = #{record.identityCard,jdbcType=VARCHAR},
+      <if test="record.mobilePhone != null" >
+        MOBILE_PHONE = #{record.mobilePhone,jdbcType=DECIMAL},
       </if>
       <if test="record.birthday != null" >
-        BIRTHDAY = #{record.birthday,jdbcType=DATE},
+        BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.addressId != null" >
-        ADDRESS_ID = #{record.addressId,jdbcType=INTEGER},
+      <if test="record.entryDate != null" >
+        ENTRY_DATE = #{record.entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.desertDate != null" >
+        DESERT_DATE = #{record.desertDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=DECIMAL},
       </if>
       <if test="record.available != null" >
-        AVAILABLE = #{record.available,jdbcType=CHAR},
+        AVAILABLE = #{record.available,jdbcType=DECIMAL},
       </if>
-      <if test="record.createDate != null" >
-        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      <if test="record.config != null" >
+        CONFIG = #{record.config,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrInfo != null" >
+        ATTR_INFO = #{record.attrInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createBy != null" >
-        CREATE_BY = #{record.createBy,jdbcType=INTEGER},
-      </if>
-      <if test="record.updateDate != null" >
-        UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+        CREATE_BY = #{record.createBy,jdbcType=DECIMAL},
       </if>
       <if test="record.updateBy != null" >
-        UPDATE_BY = #{record.updateBy,jdbcType=INTEGER},
+        UPDATE_BY = #{record.updateBy,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -302,31 +325,36 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update idea_tpl_user
-    set ID = #{record.id,jdbcType=INTEGER},
+    update ORG_USER
+    set ID = #{record.id,jdbcType=DECIMAL},
+      EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
       NAME = #{record.name,jdbcType=VARCHAR},
       ACCOUNT = #{record.account,jdbcType=VARCHAR},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
       EMAIL = #{record.email,jdbcType=VARCHAR},
-      SEX = #{record.sex,jdbcType=CHAR},
-      AGE = #{record.age,jdbcType=INTEGER},
-      WEB_CHAT = #{record.webChat,jdbcType=VARCHAR},
-      QQ = #{record.qq,jdbcType=VARCHAR},
-      IDENTITY_CARD = #{record.identityCard,jdbcType=VARCHAR},
-      BIRTHDAY = #{record.birthday,jdbcType=DATE},
-      ADDRESS_ID = #{record.addressId,jdbcType=INTEGER},
-      AVAILABLE = #{record.available,jdbcType=CHAR},
-      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
-      CREATE_BY = #{record.createBy,jdbcType=INTEGER},
-      UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
-      UPDATE_BY = #{record.updateBy,jdbcType=INTEGER}
+      OFFICE_PHONE = #{record.officePhone,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{record.mobilePhone,jdbcType=DECIMAL},
+      BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
+      ENTRY_DATE = #{record.entryDate,jdbcType=TIMESTAMP},
+      DESERT_DATE = #{record.desertDate,jdbcType=TIMESTAMP},
+      STATE = #{record.state,jdbcType=DECIMAL},
+      AVAILABLE = #{record.available,jdbcType=DECIMAL},
+      CONFIG = #{record.config,jdbcType=VARCHAR},
+      ATTR_INFO = #{record.attrInfo,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{record.createBy,jdbcType=DECIMAL},
+      UPDATE_BY = #{record.updateBy,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.idea.it.core.user.domain.TplUser" >
-    update idea_tpl_user
+    update ORG_USER
     <set >
+      <if test="employeeNumber != null" >
+        EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
       </if>
@@ -339,63 +367,68 @@
       <if test="email != null" >
         EMAIL = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        SEX = #{sex,jdbcType=CHAR},
+      <if test="officePhone != null" >
+        OFFICE_PHONE = #{officePhone,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
-        AGE = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="webChat != null" >
-        WEB_CHAT = #{webChat,jdbcType=VARCHAR},
-      </if>
-      <if test="qq != null" >
-        QQ = #{qq,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCard != null" >
-        IDENTITY_CARD = #{identityCard,jdbcType=VARCHAR},
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=DECIMAL},
       </if>
       <if test="birthday != null" >
-        BIRTHDAY = #{birthday,jdbcType=DATE},
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="addressId != null" >
-        ADDRESS_ID = #{addressId,jdbcType=INTEGER},
+      <if test="entryDate != null" >
+        ENTRY_DATE = #{entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="desertDate != null" >
+        DESERT_DATE = #{desertDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
       </if>
       <if test="available != null" >
-        AVAILABLE = #{available,jdbcType=CHAR},
+        AVAILABLE = #{available,jdbcType=DECIMAL},
       </if>
-      <if test="createDate != null" >
-        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      <if test="config != null" >
+        CONFIG = #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="attrInfo != null" >
+        ATTR_INFO = #{attrInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createBy != null" >
-        CREATE_BY = #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="updateDate != null" >
-        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+        CREATE_BY = #{createBy,jdbcType=DECIMAL},
       </if>
       <if test="updateBy != null" >
-        UPDATE_BY = #{updateBy,jdbcType=INTEGER},
+        UPDATE_BY = #{updateBy,jdbcType=DECIMAL},
       </if>
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.idea.it.core.user.domain.TplUser" >
-    update idea_tpl_user
-    set NAME = #{name,jdbcType=VARCHAR},
+    update ORG_USER
+    set EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
       ACCOUNT = #{account,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},
-      SEX = #{sex,jdbcType=CHAR},
-      AGE = #{age,jdbcType=INTEGER},
-      WEB_CHAT = #{webChat,jdbcType=VARCHAR},
-      QQ = #{qq,jdbcType=VARCHAR},
-      IDENTITY_CARD = #{identityCard,jdbcType=VARCHAR},
-      BIRTHDAY = #{birthday,jdbcType=DATE},
-      ADDRESS_ID = #{addressId,jdbcType=INTEGER},
-      AVAILABLE = #{available,jdbcType=CHAR},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      CREATE_BY = #{createBy,jdbcType=INTEGER},
-      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
-      UPDATE_BY = #{updateBy,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=INTEGER}
+      OFFICE_PHONE = #{officePhone,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=DECIMAL},
+      BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      ENTRY_DATE = #{entryDate,jdbcType=TIMESTAMP},
+      DESERT_DATE = #{desertDate,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=DECIMAL},
+      AVAILABLE = #{available,jdbcType=DECIMAL},
+      CONFIG = #{config,jdbcType=VARCHAR},
+      ATTR_INFO = #{attrInfo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=DECIMAL},
+      UPDATE_BY = #{updateBy,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
   </update>
 </mapper>
