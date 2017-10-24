@@ -5,6 +5,17 @@
 	function initIdeaContext(){
 		// 1.获取基础信息，用户、权限、菜单
 		_initWorkspaceVO();
+		
+		_bindPageEvent();
+	};
+	
+	function _bindPageEvent(){
+		$('body').on('click','.nav.level1',function(){
+			$('.nav_crumbs').empty();
+			Idea.Page.forward('home.html');
+			
+			$('#menueTree>li').removeClass('active');
+		})
 	};
 	
 	function _initWorkspaceVO(){
@@ -46,7 +57,6 @@
 	};
 	
 	function _initMenues(menueNodes){
-		debugger;
 		var node = null,
 			$leftDoms = $('.idea_view_item.left');
 		$leftDoms.append('<div id="menueTree" class="menue_container ztree"></div>');
@@ -77,11 +87,26 @@
 	};
 	
 	function _clickMenue(event, treeId, treeNode){
-		debugger;
 		Idea.Page.forward(treeNode.hash);
+		
+		_updateNavTitle(treeNode.name);
 		
 		var $currentLi = $('#'+treeNode.tId);
 		$currentLi.addClass('active').siblings().removeClass('active');
+	};
+	
+	function _updateNavTitle(name){
+		document.title = '多维组织架构-' + name;
+		
+		var $nav = $('#idea_crumbs');
+		var dom = [];
+		dom.push('<div>');
+		dom.push('<span class="nav level1">首页</span>');
+		dom.push('<span class="nav">></span>');
+		dom.push('<span class="nav level2 disable">'+name+'</span>');
+		dom.push('</div>');
+		
+		$nav.html(dom.join(''))
 	};
 	
 	function addMenue(node,$menuedDoms){
