@@ -118,8 +118,26 @@ ul, li {
 	cursor: pointer;
 }
 
+.nav_crumbs>div {
+	padding: 7px 0 4px 78px;
+}
+
+.nav.disable {
+	color: #666 !important;
+	cursor: default !important;
+}
+
 .nav_crumbs {
-	height: 20px;
+	min-height: 30px;
+}
+
+.nav_crumbs .nav {
+	color: #6b74e4;
+	cursor: pointer;
+}
+
+.nav.level1 {
+	text-decoration: underline
 }
 
 .idea_foot {
@@ -161,8 +179,14 @@ ul, li {
 }
 
 #idea_view {
-	display: flex;
-	flex-flow: row;
+	width: 1210px;
+	margin: 0 auto;
+	padding-left: calc(100vw - 100%);
+}
+
+#idea_view>div {
+	display: inline-block;
+	vertical-align: top;
 }
 
 .idea_view_item.left {
@@ -170,7 +194,7 @@ ul, li {
 }
 
 .idea_view_item.right {
-	flex: 1;
+	width: 1040px;
 }
 
 .nva_container {

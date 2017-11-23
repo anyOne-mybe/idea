@@ -5,11 +5,11 @@ import java.util.Date;
 public class TplUser {
     private Long id;
 
-    private String employeeNumber;
+    private String employno;
 
     private String name;
 
-    private String account;
+    private String loginname;
 
     private String password;
 
@@ -17,7 +17,7 @@ public class TplUser {
 
     private String officePhone;
 
-    private Long mobilePhone;
+    private String mobile;
 
     private Date birthday;
 
@@ -25,9 +25,17 @@ public class TplUser {
 
     private Date desertDate;
 
+    private String tel;
+
     private Short state;
 
     private Boolean available;
+
+    private String accountstatus;
+
+    private String changetime;
+
+    private String post;
 
     private String config;
 
@@ -49,12 +57,12 @@ public class TplUser {
         this.id = id;
     }
 
-    public String getEmployeeNumber() {
-        return employeeNumber;
+    public String getEmployno() {
+        return employno;
     }
 
-    public void setEmployeeNumber(String employeeNumber) {
-        this.employeeNumber = employeeNumber == null ? null : employeeNumber.trim();
+    public void setEmployno(String employno) {
+        this.employno = employno == null ? null : employno.trim();
     }
 
     public String getName() {
@@ -65,12 +73,12 @@ public class TplUser {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getAccount() {
-        return account;
+    public String getLoginname() {
+        return loginname;
     }
 
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
+    public void setLoginname(String loginname) {
+        this.loginname = loginname == null ? null : loginname.trim();
     }
 
     public String getPassword() {
@@ -97,12 +105,12 @@ public class TplUser {
         this.officePhone = officePhone == null ? null : officePhone.trim();
     }
 
-    public Long getMobilePhone() {
-        return mobilePhone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setMobilePhone(Long mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public Date getBirthday() {
@@ -129,6 +137,14 @@ public class TplUser {
         this.desertDate = desertDate;
     }
 
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
     public Short getState() {
         return state;
     }
@@ -143,6 +159,30 @@ public class TplUser {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public String getAccountstatus() {
+        return accountstatus;
+    }
+
+    public void setAccountstatus(String accountstatus) {
+        this.accountstatus = accountstatus == null ? null : accountstatus.trim();
+    }
+
+    public String getChangetime() {
+        return changetime;
+    }
+
+    public void setChangetime(String changetime) {
+        this.changetime = changetime == null ? null : changetime.trim();
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post == null ? null : post.trim();
     }
 
     public String getConfig() {

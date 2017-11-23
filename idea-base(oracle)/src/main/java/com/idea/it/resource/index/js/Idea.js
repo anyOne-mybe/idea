@@ -82,6 +82,24 @@
             }
         }
     };
+    
+    Idea.Page.getRequest = _getRequest;
+    function _getRequest(){
+    	var request = {},
+    		params = null,
+    		item = null;
+    	var queryStr = window.location.href.split('?')[1];
+    	if(queryStr){
+    		queryStr = decodeURIComponent(queryStr);
+    		params = queryStr.split('&');
+    		for(var i = 0; i < params.length; i++){
+    			item = params[i].split('=');
+    			request[item[0]] = item[1];
+    		}
+    	}
+    	
+    	return request;
+    };
 
     function _cleanUnUseModels() {
         var models = Idea.Model.exists;
