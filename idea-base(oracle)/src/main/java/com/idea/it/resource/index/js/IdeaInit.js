@@ -46,7 +46,6 @@
 	};
 	
 	function _initMenues(menueNodes){
-		debugger;
 		var node = null,
 			$leftDoms = $('.idea_view_item.left');
 		$leftDoms.append('<div id="menueTree" class="menue_container ztree"></div>');
@@ -77,7 +76,6 @@
 	};
 	
 	function _clickMenue(event, treeId, treeNode){
-		debugger;
 		Idea.Page.forward(treeNode.hash);
 		
 		var $currentLi = $('#'+treeNode.tId);

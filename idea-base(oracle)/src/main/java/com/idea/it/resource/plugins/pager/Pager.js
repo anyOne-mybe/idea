@@ -69,6 +69,7 @@
 		
 		$target.on('change','select',function(){
 			var pageSize = $target.find('select').val();
+			option.currentPage = 1;
 			option.callback(1,pageSize);
 		});
 	};

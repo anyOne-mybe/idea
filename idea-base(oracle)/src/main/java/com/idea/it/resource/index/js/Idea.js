@@ -51,6 +51,25 @@
     Idea.Page.goHome = function(uri) {
         Idea.Page.forward(uri,true);
     };
+    
+    Idea.Page.getRequest = _getRequest;
+    function _getRequest(){
+    	var urlArrays = window.location.href.split('?');
+    	var params = {},
+    		paramArrays = null,
+    		tempStr = null,
+    		item = null;
+    	if(urlArrays[1]){
+    		tempStr = decodeURIComponent(urlArrays[1]);
+    		paramArrays = tempStr.split('&');
+    		for(var i = 0; i < paramArrays.length; i++){
+    			item = paramArrays[i].split('=');
+    			params[item[0]] = item[1];
+    		}
+    	}
+    	
+    	return params;
+    };
 
     function _executeModelsReady() {
         var models = Idea.Model.exists;
